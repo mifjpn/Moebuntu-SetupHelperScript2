@@ -1,0 +1,44 @@
+#!/bin/bash
+# global variable
+MoePlymouthDirName="mmspinner"
+PlymothThemePath="/usr/share/plymouth/themes"
+MoeAlternativesPath="/usr/share/plymouth/themes/mmspinner/mmspinner.plymouth"
+DetaultAlternativesPath="/usr/share/plymouth/themes/bgrt/bgrt.plymouth"
+
+removemoeplymouth() {
+  echo " remove $MoePlymouthDirName"
+  if [ -d "$PlymothThemePath/$MoePlymouthDirName" ]; then
+    sudo rm -rf "$PlymothThemePath/$MoePlymouthDirName"
+  fi
+  echo ""
+}
+
+removemoeplymouthalternaives() {
+  echo " remove alternatives $MoeAlternativesPath"
+  sudo update-alternatives --remove default.plymouth "$MoeAlternativesPath" >/dev/null 2>/dev/null
+  echo ""
+}
+
+setdefaultplymouthalternatives() {
+  echo " set alternatives $DetaultAlternativesPath"
+  sudo update-alternatives --set default.plymouth "$DetaultAlternativesPath" >/dev/null 2>/dev/null
+  echo ""
+}
+
+# main
+# update-initramfs
+echo "= remove MoePlynouth $MoePlymouthDirName (set to default)="
+setdefaultplymouthalternatives;
+removemoeplymouthalternaives;
+removemoeplymouth;
+echo " update-initramfs"
+echo " <wait a minute>"
+sudo update-initramfs -u -k all
+echo ""
+echo "Done"
+echo ""
+echo -n "Hit Any Key:"
+read -r -n 1 -s answer
+echo ""
+
+

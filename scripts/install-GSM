@@ -1,0 +1,31 @@
+#!/bin/bash
+
+extman(){
+    echo "1.Search for \"User Themes\" in the \"Browse\" tab"
+    echo "2.Click the \"Add\" button to install"
+    echo "3.Go to the \"Added\" tab and activate the Extension by setting the switch on the header to \"ON\" (to the right)"
+    echo " If there is no switch in the header and there is a switch in \"use extention\", please turn it \"ON\" (slide to the right)."
+    echo "4.turn on the switch to the right of \"User Themes\""
+extension-manager 2> /dev/null
+}
+
+# Main
+echo "Install gnome-shell-manager"
+dpkg -s gnome-shell-extension-manager >/dev/null 2>&1
+if [ ! $? -eq 0 ]; then
+  sudo apt -y install gnome-shell-extension-manager
+  echo "done"
+  echo ""
+  else
+      echo "Already Installed"
+fi
+echo "--Please set extention-manager--"
+extman;
+echo "thank you!"
+echo " activate user-theme"
+sudo cp ~/.local/share/gnome-shell/extensions/user-theme@gnome-shell-extensions.gcampax.github.com/schemas/org.gnome.shell.extensions.user-theme.gschema.xml /usr/share/glib-2.0/schemas && sudo glib-compile-schemas /usr/share/glib-2.0/schemas
+echo ""
+echo -n "Hit Any Key:"
+read -r -n 1 -s answer
+echo ""
+

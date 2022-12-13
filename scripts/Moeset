@@ -1,0 +1,145 @@
+#!/bin/bash
+# ====== COLORS ======
+COL_BLACK="\x1b[30;01m"
+COL_RED="\x1b[31;01m"
+COL_GREEN="\x1b[32;01m"
+COL_YELLOW="\x1b[33;01m"
+COL_MAGENTA="\x1b[35;01m"
+COL_CYAN="\x1b[36;01m"
+COL_WHITE="\x1b[37;01m"
+COL_BLUE="\x1b[34;01m"
+COL_RESET="\x1b[39;49;00m"
+# ====== theme urls ======
+ThemePink="https://github.com/mifjpn/Moebuntu-kawaiiUbuntu-ToysOriginal/raw/22.04Lts/themes/Moe-Pink16.tar.xz"
+ThemeBlue="https://github.com/mifjpn/Moebuntu-kawaiiUbuntu-ToysOriginal/raw/22.04Lts/themes/Moe-Blue16.tar.xz"
+ThemeGreen="https://github.com/mifjpn/Moebuntu-kawaiiUbuntu-ToysOriginal/raw/22.04Lts/themes/Moe-Green16.tar.xz"
+ThemeBlueGreen="https://github.com/mifjpn/Moebuntu-kawaiiUbuntu-ToysOriginal/raw/22.04Lts/themes/Moe-BlueGreen16.tar.xz"
+ThemeNavy="https://github.com/mifjpn/Moebuntu-kawaiiUbuntu-ToysOriginal/raw/22.04Lts/themes/Moe-Navy16.tar.xz"
+ThemeOrange="https://github.com/mifjpn/Moebuntu-kawaiiUbuntu-ToysOriginal/raw/22.04Lts/themes/Moe-Orange16.tar.xz"
+ThemePurple="https://github.com/mifjpn/Moebuntu-kawaiiUbuntu-ToysOriginal/raw/22.04Lts/themes/Moe-Purple16.tar.xz"
+ThemeRed="https://github.com/mifjpn/Moebuntu-kawaiiUbuntu-ToysOriginal/raw/22.04Lts/themes/Moe-Red16.tar.xz"
+ThemeYellow="https://github.com/mifjpn/Moebuntu-kawaiiUbuntu-ToysOriginal/raw/22.04Lts/themes/Moe-Yellow16.tar.xz"
+# ====== login default picture(png) URL ======
+LoginDefaltPicture="https://github.com/mifjpn/Moebuntu-kawaiiUbuntu-ToysOriginal/raw/22.04Lts/themes/login-default.png"
+
+menu() {
+clear
+echo -e $COL_GREEN" ------------------------------------------------------------------------------"
+echo -e "$COL_GREEN                          Moebuntu Setting Helper"
+echo -e $COL_GREEN" ------------------------------------------------------------------------------"$COL_RESET
+PS3='Please enter your choice: '
+options=( 'set gnome-shell-extension-manager(Do first!)'
+          'set theme Pink'
+          'set theme Blue'
+          'set theme Green'
+          'set theme BlueGreen'
+          'set theme Navy'
+          'set theme Orange'
+          'set theme Purple'
+          'set theme Red'
+          'set theme Yellow'
+          'remove Moebuntu theme(Reset to Yaru)'
+          'set Moe-Pink-Icons'
+          'remove Moe-Pink-Icons(Reset to Yaru)'
+          'set Moe-spinner plymouth'
+          'remove Moe-spinner plymouth'
+          'set Moe Example Background'
+          'remove Moe Example Background(Reset to System default)'
+          'firefox to deb package'
+          'firefox to snap package'
+          'quit')
+
+select opt in "${options[@]}"
+do
+  case $opt in
+    "set gnome-shell-extension-manager(Do first!)")
+      /bin/bash install-GSM;
+      break
+    ;;
+    "set theme Pink")
+      /bin/bash set-theme $ThemePink $LoginDefaltPicture ;
+      break
+    ;;
+    "set theme Blue")
+      /bin/bash set-theme $ThemeBlue $LoginDefaltPicture;
+      break
+    ;;
+    "set theme Green")
+      /bin/bash set-theme $ThemeGreen $LoginDefaltPicture;
+      break
+    ;;
+    "set theme BlueGreen")
+      /bin/bash set-theme $ThemeBlueGreen $LoginDefaltPicture;
+      break
+    ;;
+    "set theme Navy")
+      /bin/bash set-theme $ThemeNavy $LoginDefaltPicture;
+      break
+    ;;
+    "set theme Orange")
+      /bin/bash set-theme $ThemeOrange $LoginDefaltPicture;
+      break
+    ;;
+    "set theme Purple")
+      /bin/bash set-theme $ThemePurple $LoginDefaltPicture;
+      break
+    ;;
+    "set theme Yellow")
+      /bin/bash set-theme $ThemeYellow $LoginDefaltPicture;
+      break
+    ;;
+    "set theme Red")
+      /bin/bash set-theme $ThemeRed $LoginDefaltPicture;
+      break
+    ;;
+    "remove Moebuntu theme(Reset to Yaru)")
+      /bin/bash theme2defalt ;
+      break
+    ;;
+    "set Moe-Pink-Icons")
+      /bin/bash iconmanager install ;
+      break
+    ;;
+    "remove Moe-Pink-Icons(Reset to Yaru)")
+      /bin/bash iconmanager remove ;
+      break
+    ;;
+    "set Moe-spinner plymouth")
+      /bin/bash set-plymouth ;
+      break
+    ;;
+    "remove Moe-spinner plymouth")
+      /bin/bash plymouth2default ;
+      break
+    ;;
+    "set Moe Example Background")
+      /bin/bash wallmanager install ;
+      break
+    ;;
+    "remove Moe Example Background(Reset to System default)")
+      /bin/bash wallmanager remove ;
+      break
+    ;;
+    "firefox to deb package")
+      /bin/bash firefox2deb ;
+      break
+    ;;
+    "firefox to snap package")
+      /bin/bash firefox2snap ;
+      break
+    ;;
+    "quit")
+      exit 0
+    ;;
+    *)
+      echo "invalid option $REPLY"
+      break
+    ;;
+  esac
+done
+menu
+}
+
+## main
+menu
+

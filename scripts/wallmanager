@@ -1,0 +1,64 @@
+#!/bin/bash
+#==== MoeIcon variable ====
+MoeWallUrl="https://github.com/mifjpn/Moebuntu-kawaiiUbuntu-ToysOriginal/raw/22.04Lts/themes/bg-default.jpg"
+MoeWallFileName=`echo $MoeWallUrl|awk -F"/" '{print $NF}'`
+SYSWallDir="/usr/share/backgrounds"
+DefaultWallFileName="warty-final-ubuntu.png"
+TempDir="Moebuntu.temp"
+
+# Install curl
+InstallCurl() {
+  echo " install curl="
+  dpkg -s curl >/dev/null 2>&1
+  if [ ! $? -eq 0 ]; then
+    sudo apt -y install curl
+    else
+        echo "Already Installed"
+  fi
+  echo ""
+}
+
+# main
+# make temp directory
+if [ ! -d $TempDir ]; then
+  echo " create temp folder $TempDir"
+  mkdir $TempDir
+fi
+
+# install or remove?
+if [ "$1" = "install" ]; then
+  # install
+  echo "=Install $MoeWallFileName="
+  InstallCurl;
+  echo " download $MoeWallFileName"
+  curl -L $MoeWallUrl --output "$TempDir/$MoeWallFileName"
+  echo " copy to $SYSWallDir"
+  sudo cp "$TempDir/$MoeWallFileName" "$SYSWallDir"
+  echo " setting to $MoeWallFileName"
+  gsettings set org.gnome.desktop.background picture-uri "file://$SYSWallDir/$MoeWallFileName"
+  gsettings set org.gnome.desktop.background picture-uri-dark "file://$SYSWallDir/$MoeWallFileName"
+  echo "Done"
+  # remove
+  elif [ "$1" = "remove" ]; then
+    echo "=Remove $MoeIconFileName and set detault="
+    echo " seting to $DefaultIconName"
+    gsettings set org.gnome.desktop.background picture-uri "file://$SYSWallDir/$DefaultWallFileName"
+    gsettings set org.gnome.desktop.background picture-uri-dark "file://$SYSWallDir/$DefaultWallFileName"
+    # if exsist remove MoeBuntuWall
+    if [ -e "$SYSWallDir/$MoeWallFileName" ]; then
+      echo " Remove $SYSWallDir/$MoeWallFileName"
+      sudo rm "$SYSWallDir/$MoeWallFileName"
+    fi
+    echo "Done"
+    echo ""
+  else
+    echo "install? remove?"
+fi
+echo " remove temp folder $TempDir"
+rm -rf $TempDir
+echo ""
+echo -n "Hit Any Key:"
+read -r -n 1 -s answer
+echo ""
+
+

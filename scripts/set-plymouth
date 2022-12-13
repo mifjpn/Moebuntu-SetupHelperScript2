@@ -1,0 +1,160 @@
+#!/bin/bash
+# global variable
+MoePlymouthURL="https://github.com/mifjpn/Moebuntu-kawaiiUbuntu-ToysOriginal/raw/22.04Lts/plymouth/mmspinner.tar.xz"
+MoePlymouthFileName=`echo $MoePlymouthURL|awk -F"/" '{print $NF}'`
+MoePlymouthDirName="mmspinner"
+MoePlymouthBackGroundFile="/usr/share/plymouth/themes/mmspinner/background-tile.png"
+PlymothThemePath="/usr/share/plymouth/themes"
+MoeAlternativesPath="/usr/share/plymouth/themes/mmspinner/mmspinner.plymouth"
+DetaultAlternativesPath="/usr/share/plymouth/themes/bgrt/bgrt.plymouth"
+PlymouthDefaultPngUrl="https://github.com/mifjpn/Moebuntu-kawaiiUbuntu-ToysOriginal/raw/22.04Lts/plymouth/plymouth-default.png"
+PlymouthDefaultFileName=`echo $PlymouthDefaultPngUrl|awk -F"/" '{print $NF}'`
+TempDir="Moebuntu.temp"
+
+#Ask Yn
+askyn() {
+  echo -n "(Y/N)? "
+  while read -r -n 1 -s answer; do
+    if [[ $answer = [YyNn] ]]; then
+      [[ $answer = [Yy] ]] && retval=0
+      [[ $answer = [Nn] ]] && retval=1
+      break
+    fi
+  done
+  echo # just a final linefeed, optics...
+  return $retval
+}
+
+removemoeplymouth() {
+  echo " remove $MoePlymouthDirName"
+  if [ -d "$PlymothThemePath/$MoePlymouthDirName" ]; then
+    sudo rm -rf "$PlymothThemePath/$MoePlymouthDirName"
+  fi
+}
+
+removemoeplymouthalternaives() {
+  echo " remove alternatives $MoeAlternativesPath"
+  sudo update-alternatives --remove default.plymouth "$MoeAlternativesPath" >/dev/null 2>/dev/null
+}
+
+setdefaultplymouthalternatives() {
+  echo " set alternatives $DetaultAlternativesPath"
+  sudo update-alternatives --set default.plymouth "$DetaultAlternativesPath" >/dev/null 2>/dev/null
+}
+
+# Main
+# Prepare for Moe-nized
+echo "=set plymouth="
+#  Set-default-temporaly
+echo " prepair for Moe"
+setdefaultplymouthalternatives;
+removemoeplymouthalternaives;
+removemoeplymouth;
+
+# Create temp dir
+if [ ! -d $TempDir ]; then
+  echo " create temp folder $TempDir"
+  mkdir $TempDir
+fi
+
+# Install curl
+echo " install curl"
+dpkg -s curl >/dev/null 2>&1
+if [ ! $? -eq 0 ]; then
+  sudo apt install -y curl
+  echo " installed"
+  else
+      echo " already Installed"
+fi
+
+# Download Plymouth
+echo " download $MoePlymouthFileName "
+curl -L $MoePlymouthURL --output "$TempDir/$MoePlymouthFileName"
+
+# Unpack
+echo " unpack $MoePlymouthFileName"
+tar Jxfv "$TempDir/$MoePlymouthFileName" -C $TempDir > /dev/null 2> /dev/null
+
+# Set to plymouth Folder
+echo " copy to system theme folder"
+cd $TempDir
+sudo cp -R $MoePlymouthDirName "$PlymothThemePath/"
+cd ..
+echo " exist Moe Plymouth: `ls -d "$PlymothThemePath/$MoePlymouthDirName"`"
+
+# Set update-altanatives
+  echo " set plymouth altanative"
+  echo "  install alternative default.plymouth $MoeAlternativesPath"
+  sudo update-alternatives --install /usr/share/plymouth/themes/default.plymouth default.plymouth "$MoeAlternativesPath" 20 >/dev/null 2>/dev/null
+  echo "  set altanatives default.plymouth $MoeAlternativesPath"
+  sudo update-alternatives --set default.plymouth "$MoeAlternativesPath" >/dev/null 2>/dev/null
+
+# Change login screen
+echo -n "Set Original(or Example) plymouth png-file?:"
+if ! askyn; then
+  # Change screen No
+  # Remove tempdir
+  rm -rf $TempDir
+  # Update-initramfs
+  echo " update-initramfs"
+  echo " <wait a minute>"
+  sudo update-initramfs -u -k all 
+  echo "Done"
+  echo -n "Hit Any Key:"
+  read -r -n 1 -s answer  
+  echo ""
+  exit 0
+fi
+# Change Screen Yes
+read -p "Please drag-and-drop plymouth png-file or push to set return(Example):" FileDrop
+if [ "$FileDrop" = "" ]; then
+  # Null return
+  # Set to default
+  echo " download default login picture"
+  curl -L $PlymouthDefaultPngUrl --output "$TempDir/$PlymouthDefaultFileName"
+  # Set default plymouth picture
+  echo " set default plymouth picture"
+  sudo cp "$TempDir/$PlymouthDefaultFileName" $MoePlymouthBackGroundFile
+  else
+  # Drag-and-Drop string exists
+  PlymouthFile=`echo $FileDrop | tr -d \'`
+  if [ ! -e $PlymouthFile ]; then
+    echo "File Not exist!"
+    echo "Can not change login picture"
+    # remove temp-dir
+    rm -rf $TempDir
+    # Update-initramfs
+    echo " update-initramfs"
+    echo " <wait a minute>"
+    sudo update-initramfs -u -k all 
+    echo "Done"    
+    echo -n "Hit Any Key:"
+    read -r -n 1 -s answer
+    echo ""     
+    exit 0   
+  fi
+  echo " set Plymouth tile picture to $PlymouthFile"
+  sudo cp $PlymouthFile $MoePlymouthBackGroundFile
+fi
+# remove temp-dir
+rm -rf $TempDir
+# Update-initramfs
+echo " update-initramfs"
+echo " <wait a minute>"
+sudo update-initramfs -u -k all 
+echo "Done"    
+echo -n "Hit Any Key:"
+read -r -n 1 -s answer
+echo ""     
+exit 0
+  
+
+
+
+
+
+
+
+
+  
+

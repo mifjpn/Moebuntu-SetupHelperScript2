@@ -1,0 +1,29 @@
+#!/bin/bash
+
+#if [ -e /etc/apt/preferences.d/mozillateamppa ]; then
+  echo "=Remove deb firefox and Install snap firefox=" 
+  echo " remove deb-firefox from dock"
+  tmp=`gsettings get org.gnome.shell favorite-apps`
+  tmp=`echo $tmp |  sed -e "s/'firefox.desktop', //g"`
+  gsettings set org.gnome.shell favorite-apps "$tmp"  
+  tmp=`gsettings get org.gnome.shell favorite-apps`
+  tmp=`echo $tmp | sed -e "s/'firefox_firefox.desktop', //g"`
+  gsettings set org.gnome.shell favorite-apps "$tmp"  
+  echo " remove prefarence of DEB firefox"
+  sudo rm -rf /etc/apt/preferences.d/mozillateamppa
+  echo " remove deb firefox"
+  sudo apt remove --autoremove -y firefox >/dev/null 2>/dev/null
+  echo " remove firefox deb repository"
+  sudo add-apt-repository --remove -y ppa:mozillateam/ppa >/dev/null 2>/dev/null
+  echo " install snap firefox"
+  sudo snap install firefox
+  echo " set firefox to dock"
+  tmp=`gsettings get org.gnome.shell favorite-apps`
+  tmp=`echo $tmp | sed s/\\\\[/"['firefox_firefox.desktop', "/`
+  gsettings set org.gnome.shell favorite-apps "$tmp"
+  echo ""
+  echo -n "Hit Any Key:"
+  read -r -n 1 -s answer
+  echo ""
+#fi
+

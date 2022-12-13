@@ -1,0 +1,37 @@
+#!/bin/bash
+
+#if ! [ -e /etc/apt/preferences.d/mozillateamppa ]; then
+  echo "=Remove snap firefox and Install deb firefox="
+  echo " remove deb-firefox from dock as favorite"
+  tmp=`gsettings get org.gnome.shell favorite-apps`
+  tmp=`echo $tmp |  sed -e "s/'firefox.desktop', //g"`
+  gsettings set org.gnome.shell favorite-apps "$tmp"  
+  tmp=`gsettings get org.gnome.shell favorite-apps`
+  tmp=`echo $tmp | sed -e "s/'firefox_firefox.desktop', //g"`
+  gsettings set org.gnome.shell favorite-apps "$tmp"
+  #snap list contain firefox?
+  if snap list | grep -q -n firefox; then
+    echo " remove snap firefox"
+    echo "  CAUTION!!:if remove command is waited longtime,stop this script(quit at Window-close button or ^c) and run update-manager for update all snap!!"
+    sudo snap remove --purge firefox
+    sudo apt remove -y --autoremove firefox >/dev/null 2>/dev/null
+  fi
+  echo " add deb-firefox repository"
+  sudo add-apt-repository -y ppa:mozillateam/ppa >/dev/null 2>/dev/null
+  echo " set deb-firefox update preference"
+  sudo cp mozillateamppa /etc/apt/preferences.d/
+  echo " install deb-firefox"
+  sudo apt update >/dev/null 2>/dev/null
+  sudo apt -y install firefox
+  echo " install deb-firefox to dock as favorite"
+  tmp=`gsettings get org.gnome.shell favorite-apps`
+  tmp=`echo $tmp | sed s/\\\\[/"['firefox.desktop',"/`
+  gsettings set org.gnome.shell favorite-apps "$tmp"
+  echo " check update preferens"
+  apt-cache policy firefox
+  echo ""
+  echo -n "Hit Any Key:"
+  read -r -n 1 -s answer
+  echo ""
+#fi
+

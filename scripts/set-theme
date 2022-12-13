@@ -1,0 +1,155 @@
+#!/bin/bash
+#Theme valiable
+ThemeUrl=$1
+ThemeFileName=`echo $ThemeUrl|awk -F"/" '{print $NF}'`
+ThemeDirName=`echo $ThemeFileName|awk '{print substr($0,0,index($0,".")-1)}'`
+ThemeName=$ThemeDirName
+#login default valiable
+LoginDefaultPngUrl=$2
+LoginDefaultFileName=`echo $LoginDefaultPngUrl|awk -F"/" '{print $NF}'`
+
+TempDir="Moebuntu.temp"
+
+#Ask Yn
+askyn() {
+  echo -n "(Y/N)? "
+  while read -r -n 1 -s answer; do
+    if [[ $answer = [YyNn] ]]; then
+      [[ $answer = [Yy] ]] && retval=0
+      [[ $answer = [Nn] ]] && retval=1
+      break
+    fi
+  done
+  echo # just a final linefeed, optics...
+  return $retval
+}
+
+
+loginlogobak() {
+echo "=Login logo change to default(if exist back up)="
+if [ -e /usr/share/plymouth/ubuntu-logo.org.png ]; then
+  sudo cp /usr/share/plymouth/ubuntu-logo.org.png /usr/share/plymouth/ubuntu-logo.png
+echo "Done"
+fi
+}
+
+removethemealtanatives() {
+echo "=Remove all Moe GDM altanetives="
+  sudo update-alternatives --remove gdm-theme.gresource /usr/share/themes/Moe-Green16/gnome-shell/gnome-shell-theme.gresource >/dev/null 2>/dev/null
+  sudo update-alternatives --remove gdm-theme.gresource /usr/share/themes/Moe-BlueGreen16/gnome-shell/gnome-shell-theme.gresource >/dev/null 2>/dev/null
+  sudo update-alternatives --remove gdm-theme.gresource /usr/share/themes/Moe-Navy16/gnome-shell/gnome-shell-theme.gresource >/dev/null 2>/dev/null
+  sudo update-alternatives --remove gdm-theme.gresource /usr/share/themes/Moe-Purple16/gnome-shell/gnome-shell-theme.gresource >/dev/null 2>/dev/null
+  sudo update-alternatives --remove gdm-theme.gresource /usr/share/themes/Moe-Red16/gnome-shell/gnome-shell-theme.gresource >/dev/null 2>/dev/null
+  sudo update-alternatives --remove gdm-theme.gresource /usr/share/themes/Moe-Orange16/gnome-shell/gnome-shell-theme.gresource >/dev/null 2>/dev/null
+  sudo update-alternatives --remove gdm-theme.gresource /usr/share/themes/Moe-Yellow16/gnome-shell/gnome-shell-theme.gresource >/dev/null 2>/dev/null
+  sudo update-alternatives --remove gdm-theme.gresource /usr/share/themes/Moe-Blue16/gnome-shell/gnome-shell-theme.gresource >/dev/null 2>/dev/null
+  sudo update-alternatives --remove gdm-theme.gresource /usr/share/themes/Moe-Pink16/gnome-shell/gnome-shell-theme.gresource >/dev/null 2>/dev/null
+echo "Done"
+}
+
+# main
+# make temp directory
+if [ ! -d $TempDir ]; then
+  mkdir $TempDir
+fi
+# Install curl
+echo " Install curl"
+dpkg -s curl >/dev/null 2>&1
+if [ ! $? -eq 0 ]; then
+  sudo apt install -y curl
+  else
+      echo " Already Installed"
+fi
+
+# Download Theme
+echo " download $ThemeFileName"
+curl -L $ThemeUrl --output "$TempDir/$ThemeFileName"
+
+# Unpack
+echo " unpack $ThemeFileName="
+tar Jxfv "$TempDir/$ThemeFileName" -C $TempDir > /dev/null 2> /dev/null
+
+# set to themes Folder
+echo " copy to system theme folder"
+cd $TempDir
+sudo cp -R $ThemeDirName /usr/share/themes/
+cd ..
+echo "Exist Moe Theme(s): `ls -d /usr/share/themes/Moe*`"
+echo ""
+
+# change theme gsetting
+echo " change theme gsettings"
+gsettings set org.gnome.desktop.interface gtk-theme $ThemeName
+gsettings set org.gnome.shell.extensions.user-theme name $ThemeName
+
+# change login screen
+echo -n "Change login screen"
+if askyn; then
+  echo " prepair GDM and login banner setting=>"
+  removethemealtanatives;
+  loginlogobak;
+  echo ""
+  
+# set update-altanatives
+  echo " set GDM update-altanatives"
+  sudo update-alternatives --install /usr/share/gnome-shell/gdm-theme.gresource gdm-theme.gresource "/usr/share/themes/$ThemeDirName/gnome-shell/gnome-shell-theme.gresource" 20 >/dev/null 2>/dev/null
+  sudo update-alternatives --set gdm-theme.gresource /usr/share/themes/$ThemeDirName/gnome-shell/gnome-shell-theme.gresource >/dev/null 2>/dev/null
+  
+# set login banner
+  echo " set login-banner"
+  sudo cp /usr/share/plymouth/ubuntu-logo.png /usr/share/plymouth/ubuntu-logo.org.png
+  sudo cp /usr/share/themes/$ThemeDirName/ubuntu-logo.png /usr/share/plymouth/ubuntu-logo.png
+
+# login png-file
+  echo -n "Set Original(or Example) login png-file?:"
+  if askyn; then    
+    read -p "Please drag-and-drop login png-file or push to set return(Example):" FileDrop
+    if [ "$FileDrop" = "" ]; then
+# set default login picture
+# download default login picture
+      echo " download default login picture=" 
+      echo " download $TempDir/$LoginDefaultFileName"
+      curl -L $LoginDefaultPngUrl --output "$TempDir/$LoginDefaultFileName"
+
+# set default GDM
+      echo " set login default picture to GDM-theme"
+      sudo cp $TempDir/$LoginDefaultFileName /usr/share/themes/$ThemeDirName/gnome-shell/moebuntu_bg.png
+    else
+
+# FileDrop to login
+      LoginFile=`echo $FileDrop | tr -d \'`
+      echo "=Set fileDrop $LoginFile to login picture="
+      if [ ! -e $LoginFile ]; then
+        echo "File Not exist!"
+        echo "Can not change login picture"
+        # remove temp-dir
+        rm -rf $TempDir
+        echo ""
+        echo -n "Hit Any Key:"
+        read -r -n 1 -s answer
+        echo ""     
+        exit 0   
+      fi
+      sudo cp $LoginFile /usr/share/themes/$ThemeDirName/gnome-shell/moebuntu_bg.png
+      echo "Done"
+      echo ""
+    fi
+  else
+    echo "=set login to Moe-ized="
+    echo "Done"
+  fi
+else  
+  echo "=Not change login picture="
+  echo "check Default(Yaru) altanetives"
+  sudo update-alternatives --set gdm-theme.gresource /usr/share/gnome-shell/theme/Yaru/gnome-shell-theme.gresource >/dev/null 2>/dev/null
+  echo "Done"
+  removethemealtanatives;
+  loginlogobak;
+fi
+# remove temp-dir
+rm -rf $TempDir
+echo ""
+echo -n "Hit Any Key:"
+read -r -n 1 -s answer
+echo ""
+
