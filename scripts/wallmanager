@@ -46,7 +46,8 @@ if [ "$1" = "install" ]; then
   # install
   echo "=Install $MoeWallFileName="
   InstallCurl;
-  echo -n " Set wallpaper to Toy's Basic"
+  echo " Set wallpaper to Toy's Basic image(Y)"
+  echo " Or Set your original jpg-image or example image(N)" 
   if askyn; then
     echo " download $MoeBasicWallFileName"
     curl -L $MoeBasicWallUrl --output "$TempDir/$MoeBasicWallFileName"
