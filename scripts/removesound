@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# main
+# remove all Moesound
+echo " remove all MoeSound"
+sudo rm -rf /usr/share/sounds/Moe*
+# change sound gsetting
+echo " change sound gsettings Yaru"
+gsettings set org.gnome.desktop.sound theme-name "Yaru"
+echo "Done"
+#
+echo ""
+echo -n "Hit Any Key:"
+read -r -n 1 -s answer
+echo ""
+exit 0

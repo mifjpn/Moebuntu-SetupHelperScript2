@@ -21,6 +21,11 @@ ThemeRed="https://github.com/mifjpn/Moebuntu-kawaiiUbuntu-ToysOriginal/raw/22.04
 ThemeYellow="https://github.com/mifjpn/Moebuntu-kawaiiUbuntu-ToysOriginal/raw/22.04Lts/themes/Moe-Yellow16.tar.xz"
 # ====== login default picture(png) URL ======
 LoginDefaltPicture="https://github.com/mifjpn/Moebuntu-kawaiiUbuntu-ToysOriginal/raw/22.04Lts/themes/login-default.png"
+# ====== Sound URL ======
+Soundiori="https://github.com/mifjpn/Moebuntu-kawaiiUbuntu-ToysOriginal/raw/22.04Lts/sound/Moesound_iori.tar.gz"
+Soundmaid_iori="https://github.com/mifjpn/Moebuntu-kawaiiUbuntu-ToysOriginal/raw/22.04Lts/sound/Moesound_maid_iori.tar.gz"
+SoundSF_iori="https://github.com/mifjpn/Moebuntu-kawaiiUbuntu-ToysOriginal/raw/22.04Lts/sound/Moesound_SF_iori.tar.gz"
+SoundMGd="https://github.com/mifjpn/Moebuntu-kawaiiUbuntu-ToysOriginal/raw/22.04Lts/sound/Moesound_MGd.tar.gz"
 
 menu() {
 clear
@@ -47,6 +52,11 @@ options=( 'base setting(Do first!)'
           'remove Moe Wallpaper'
           'firefox to deb package'
           'firefox to snap package'
+          'set Moesound_iori'
+          'set Moesound_maid_iori'
+          'set Moesound_SF_iori'
+          'set Moesound_MGd'
+          'remove Moesound'
           'quit')
 
 select opt in "${options[@]}"
@@ -126,6 +136,31 @@ do
     ;;
     "firefox to snap package")
       /bin/bash firefox2snap ;
+      break
+    ;;
+    "set Moesound_iori")
+      /bin/bash setsound $Soundiori ;
+      /bin/bash loginsound install ;
+      break
+    ;;
+    "set Moesound_maid_iori")
+      /bin/bash setsound $Soundmaid_iori ;
+      /bin/bash loginsound install ;
+      break
+    ;;
+    "set Moesound_SF_iori")
+      /bin/bash setsound $SoundSF_iori ;
+      /bin/bash loginsound install ;
+      break
+    ;;
+    "set Moesound_MGd")
+      /bin/bash setsound $SoundMGd ;
+      /bin/bash loginsound install ;
+      break
+    ;;
+    "remove Moesound")
+      /bin/bash removesound ;
+      /bin/bash loginsound remove ;
       break
     ;;
     "quit")

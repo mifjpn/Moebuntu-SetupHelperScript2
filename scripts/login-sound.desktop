@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Login-Sound
+GenericName=Login-Sound
+Comment=Login-Sound
+Exec=/usr/bin/canberra-gtk-play --id="desktop-login" --description="GNOME Login"
+Terminal=false
+Type=Application
+X-GNOME-Autostart-enabled=true

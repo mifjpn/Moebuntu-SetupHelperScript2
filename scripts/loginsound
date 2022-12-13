@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [ $1 == "install" ]; then
+  mkdir -p ~/.config/autostart
+  cp login-sound.desktop ~/.config/autostart
+elif [ $1 == "remove" ]; then
+  rm ~/.config/autostart/login-sound.desktop
+fi 
+
+exit 0
+
