@@ -25,7 +25,7 @@ LoginDefaltPicture="https://github.com/mifjpn/Moebuntu-kawaiiUbuntu-ToysOriginal
 menu() {
 clear
 echo -e $COL_GREEN" ------------------------------------------------------------------------------"
-echo -e "$COL_GREEN                          Moebuntu Setting Helper"
+echo -e "$COL_GREEN                          Moebuntu Setting Helper 2"
 echo -e $COL_GREEN" ------------------------------------------------------------------------------"$COL_RESET
 PS3='Please enter your choice: '
 options=( 'base setting(Do first!)'

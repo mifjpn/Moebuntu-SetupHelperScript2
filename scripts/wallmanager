@@ -1,10 +1,13 @@
 #!/bin/bash
 #==== MoeIcon variable ====
+MoeBasicWallUrl="https://github.com/mifjpn/Moebuntu-kawaiiUbuntu-ToysOriginal/raw/22.04Lts/themes/bg-basic.jpg"
+MoeBasicWallFileName=`echo $MoeBasicWallUrl|awk -F"/" '{print $NF}'`
 MoeWallUrl="https://github.com/mifjpn/Moebuntu-kawaiiUbuntu-ToysOriginal/raw/22.04Lts/themes/bg-default.jpg"
 MoeWallFileName=`echo $MoeWallUrl|awk -F"/" '{print $NF}'`
 SYSWallDir="/usr/share/backgrounds"
 DefaultWallFileName="warty-final-ubuntu.png"
 TempDir="Moebuntu.temp"
+ConstMoeWallFileName="moe_wall.jpg"
 
 # Install curl
 InstallCurl() {
@@ -16,6 +19,19 @@ InstallCurl() {
         echo "Already Installed"
   fi
   echo ""
+}
+#Ask Yn
+askyn() {
+  echo -n "(Y/N)? "
+  while read -r -n 1 -s answer; do
+    if [[ $answer = [YyNn] ]]; then
+      [[ $answer = [Yy] ]] && retval=0
+      [[ $answer = [Nn] ]] && retval=1
+      break
+    fi
+  done
+  echo # just a final linefeed, optics...
+  return $retval
 }
 
 # main
@@ -30,29 +46,89 @@ if [ "$1" = "install" ]; then
   # install
   echo "=Install $MoeWallFileName="
   InstallCurl;
-  echo " download $MoeWallFileName"
-  curl -L $MoeWallUrl --output "$TempDir/$MoeWallFileName"
-  echo " copy to $SYSWallDir"
-  sudo cp "$TempDir/$MoeWallFileName" "$SYSWallDir"
-  echo " setting to $MoeWallFileName"
-  gsettings set org.gnome.desktop.background picture-uri "file://$SYSWallDir/$MoeWallFileName"
-  gsettings set org.gnome.desktop.background picture-uri-dark "file://$SYSWallDir/$MoeWallFileName"
-  echo "Done"
-  # remove
-  elif [ "$1" = "remove" ]; then
-    echo "=Remove $MoeIconFileName and set detault="
-    echo " seting to $DefaultIconName"
-    gsettings set org.gnome.desktop.background picture-uri "file://$SYSWallDir/$DefaultWallFileName"
-    gsettings set org.gnome.desktop.background picture-uri-dark "file://$SYSWallDir/$DefaultWallFileName"
-    # if exsist remove MoeBuntuWall
-    if [ -e "$SYSWallDir/$MoeWallFileName" ]; then
-      echo " Remove $SYSWallDir/$MoeWallFileName"
-      sudo rm "$SYSWallDir/$MoeWallFileName"
-    fi
-    echo "Done"
+  echo -n " Set wallpaper to Toy's Basic"
+  if askyn; then
+    echo " download $MoeBasicWallFileName"
+    curl -L $MoeBasicWallUrl --output "$TempDir/$MoeBasicWallFileName"
+    echo " copy $TempDir/$MoeBasicWallFileName to $SYSWallDir/$ConstMoeWallFileName"
+    sudo cp "$TempDir/$MoeBasicWallFileName" "$SYSWallDir/$ConstMoeWallFileName"
+    echo " setting to file://$SYSWallDir/$ConstMoeWallFileName"
+    gsettings set org.gnome.desktop.background picture-uri "file://$SYSWallDir/$ConstMoeWallFileName"
+    gsettings set org.gnome.desktop.background picture-uri-dark "file://$SYSWallDir/$ConstMoeWallFileName" 
+    echo " remove temp folder $TempDir"
+    rm -rf $TempDir
     echo ""
+    echo -n "Hit Any Key:"
+    read -r -n 1 -s answer
+    echo ""
+    exit 0     
   else
-    echo "install? remove?"
+  # Ask filename of wallpaper
+    read -p "Please drag-and-drop wall jpg-file or push to set return(Example):" FileDrop
+    if [ "$FileDrop" = "" ]; then
+# set default login picture
+# download default login picture
+      echo " download example login picture=" 
+      echo " download $MoeWallFileName"
+      curl -L $MoeWallUrl --output "$TempDir/$MoeWallFileName"
+      echo " copy to $SYSWallDir"
+      sudo cp "$MoeWallFileName" "$SYSWallDir/$ConstMoeWallFileName"
+      echo " setting to $MoeWallFileName"
+      gsettings set org.gnome.desktop.background picture-uri "file://$SYSWallDir/$ConstMoeWallFileName"
+      gsettings set org.gnome.desktop.background picture-uri-dark "file://$SYSWallDir/$ConstMoeWallFileName"
+      echo "Done"
+      echo " remove temp folder $TempDir"
+      rm -rf $TempDir
+      echo ""
+      echo -n "Hit Any Key:"
+      read -r -n 1 -s answer
+      echo ""
+      exit 0 
+    else
+    # FileDrop to login
+      WallFileFullPath=`echo $FileDrop | tr -d \'`
+      echo "=Set fileDrop $WallFileFullPath to Wallpicture="
+      if [ ! -e $WallFileFullPath ]; then
+        echo "File Not exist!"
+        echo "Can not change Wallpaper"
+        # remove temp-dir
+        rm -rf $TempDir
+        echo ""
+        echo -n "Hit Any Key:"
+        read -r -n 1 -s answer
+        echo ""     
+        exit 0   
+      fi
+      echo " copy $WallFileFullPath to $SYSWallDir"
+      sudo cp "$WallFileFullPath" "$SYSWallDir/$ConstMoeWallFileName"
+      echo " setting to $WallFileFullPath"
+      gsettings set org.gnome.desktop.background picture-uri "file://$SYSWallDir/$ConstMoeWallFileName"
+      gsettings set org.gnome.desktop.background picture-uri-dark "file://$SYSWallDir/$ConstMoeWallFileName"
+      echo "Done"
+      echo " remove temp folder $TempDir"
+      rm -rf $TempDir
+      echo ""
+      echo -n "Hit Any Key:"
+      read -r -n 1 -s answer
+      echo ""
+      exit 0 
+    fi
+  fi
+  # remove
+elif [ "$1" = "remove" ]; then
+  echo "=Remove $MoeIconFileName and set detault="
+  echo " seting to $DefaultIconName"
+  gsettings set org.gnome.desktop.background picture-uri "file://$SYSWallDir/$DefaultWallFileName"
+  gsettings set org.gnome.desktop.background picture-uri-dark "file://$SYSWallDir/$DefaultWallFileName"
+  # if exsist remove MoeBuntuWall
+  if [ -e "$SYSWallDir/$ConstMoeWallFileName" ]; then
+    echo " Remove $SYSWallDir/$ConstMoeWallFileName"
+    sudo rm "$SYSWallDir/$ConstMoeWallFileName"
+  fi
+  echo "Done"
+  echo ""
+else
+  echo "install? remove?"
 fi
 echo " remove temp folder $TempDir"
 rm -rf $TempDir
@@ -60,5 +136,4 @@ echo ""
 echo -n "Hit Any Key:"
 read -r -n 1 -s answer
 echo ""
-
 
