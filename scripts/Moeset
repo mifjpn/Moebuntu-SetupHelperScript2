@@ -28,7 +28,7 @@ echo -e $COL_GREEN" ------------------------------------------------------------
 echo -e "$COL_GREEN                          Moebuntu Setting Helper"
 echo -e $COL_GREEN" ------------------------------------------------------------------------------"$COL_RESET
 PS3='Please enter your choice: '
-options=( 'set gnome-shell-extension-manager(Do first!)'
+options=( 'base setting(Do first!)'
           'set theme Pink'
           'set theme Blue'
           'set theme Green'
@@ -38,13 +38,13 @@ options=( 'set gnome-shell-extension-manager(Do first!)'
           'set theme Purple'
           'set theme Red'
           'set theme Yellow'
-          'remove Moebuntu theme(Reset to Yaru)'
+          'remove Moe-theme'
           'set Moe-Pink-Icons'
-          'remove Moe-Pink-Icons(Reset to Yaru)'
+          'remove Moe-Pink-Icons'
           'set Moe-spinner plymouth'
           'remove Moe-spinner plymouth'
-          'set Moe Example Background'
-          'remove Moe Example Background(Reset to System default)'
+          'set Moe Wallpaper'
+          'remove Moe Wallpaper'
           'firefox to deb package'
           'firefox to snap package'
           'quit')
@@ -52,7 +52,7 @@ options=( 'set gnome-shell-extension-manager(Do first!)'
 select opt in "${options[@]}"
 do
   case $opt in
-    "set gnome-shell-extension-manager(Do first!)")
+    "base setting(Do first!)'")
       /bin/bash install-GSM;
       break
     ;;
@@ -92,7 +92,7 @@ do
       /bin/bash set-theme $ThemeRed $LoginDefaltPicture;
       break
     ;;
-    "remove Moebuntu theme(Reset to Yaru)")
+    "remove Moe-theme")
       /bin/bash theme2defalt ;
       break
     ;;
@@ -100,7 +100,7 @@ do
       /bin/bash iconmanager install ;
       break
     ;;
-    "remove Moe-Pink-Icons(Reset to Yaru)")
+    "remove Moe-Pink-Icons")
       /bin/bash iconmanager remove ;
       break
     ;;
@@ -112,11 +112,11 @@ do
       /bin/bash plymouth2default ;
       break
     ;;
-    "set Moe Example Background")
+    "set Moe Wallpaper")
       /bin/bash wallmanager install ;
       break
     ;;
-    "remove Moe Example Background(Reset to System default)")
+    "remove Moe Wallpaper")
       /bin/bash wallmanager remove ;
       break
     ;;
