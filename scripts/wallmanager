@@ -117,8 +117,8 @@ if [ "$1" = "install" ]; then
   fi
   # remove
 elif [ "$1" = "remove" ]; then
-  echo "=Remove $MoeIconFileName and set detault="
-  echo " seting to $DefaultIconName"
+  echo "=Remove $MoeWallFileName and set detault="
+  echo " seting to $DefaultWallFileName"
   gsettings set org.gnome.desktop.background picture-uri "file://$SYSWallDir/$DefaultWallFileName"
   gsettings set org.gnome.desktop.background picture-uri-dark "file://$SYSWallDir/$DefaultWallFileName"
   # if exsist remove MoeBuntuWall
