@@ -73,7 +73,7 @@ if [ "$1" = "install" ]; then
       echo " download $MoeWallFileName"
       curl -L $MoeWallUrl --output "$TempDir/$MoeWallFileName"
       echo " copy to $SYSWallDir"
-      sudo cp "$MoeWallFileName" "$SYSWallDir/$ConstMoeWallFileName"
+      sudo cp "$TempDir/$MoeWallFileName" "$SYSWallDir/$ConstMoeWallFileName"
       echo " setting to $MoeWallFileName"
       gsettings set org.gnome.desktop.background picture-uri "file://$SYSWallDir/$ConstMoeWallFileName"
       gsettings set org.gnome.desktop.background picture-uri-dark "file://$SYSWallDir/$ConstMoeWallFileName"
