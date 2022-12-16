@@ -54,9 +54,8 @@ If you press the return key without entering anything, the example PNG image wil
 "15) remove Moe-spinner plymouth" sets back to the default Plymouth where the default "UBUNTU spinner" is displayed.
 
 The "16) '' choices are used to switch the example background of the screen to a Moe image(Kawaii image)  pasting the "Moebuntu logo''
-If you want to use Toy's basic wallpaper image, type "Y" in " Set wallpaper to Toy's Basic image(Y)
- Or Set your original jpg-image or example image(N)"
-If you choose "N" for using the original JPG image file as wallpaper image, drag and drop the JPG image file from the nautilus file manager.
+
+You will be asked "Please drag-and-drop wall jpg-file or push to set return (Example):", so if you want to change the desktop wallpaper,drag and drop the JPG image file from the nautilus file manager.
 If you press the return key without entering anything, the example JPG image will be specified.
 
 If you choose "17)", the background will return to the default background screen of "UBUNTU".
