@@ -36,7 +36,7 @@ That's all there is to do here.
 Numbers 2) to 10) of choice are setups of 9 color "themes" that are each "Window Theme and Shell Theme Set".
 In those settings, you can change the login screen.
 If you want to change, type "Y" to the "Change login screen" question.
-If you want to change to Toy's basic login screen, type "Y" to the "Set Toy's basic login picture(Y)
+If you want to change to Moebuntu basic login screen, type "Y" to the "Set Moebuntu basic login picture(Y)
  Or Original(or Example) login png-picture(N)?:" question.
 If You choose "N" for Oringinal or Example login images,
 A question for inputting images in PNG format for changes will appear.
@@ -46,7 +46,7 @@ If you choose "11)remove Moebuntu theme(Reset to Yaru)", the 9-color theme file 
 The choices for "12) and 13)" are items to set or remove Moe-Pink-Icon (kawaii icons).
 
 "14) set Moe-spinner plymouth" is a setting item of Moe (Kawaii) plymouth (OS loading waiting screen).
-If you want to set Toy's basic screen image, type "Y" in "Set Toy's basic plymouse screen image (Y)
+If you want to set Moebuntu basic screen image, type "Y" in "Set Moebuntu basic plymouse screen image (Y)
 Or Set Original(or Example) plymouth png-file(N)?:". 
 If you choose "N" for using the original PNG image file as a plymouth image, drag and drop the PNG image file from the nautilus file manager.
 If you press the return key without entering anything, the example PNG image will be specified.
