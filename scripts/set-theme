@@ -101,7 +101,7 @@ if askyn; then
   sudo cp /usr/share/themes/$ThemeDirName/ubuntu-logo.png /usr/share/plymouth/ubuntu-logo.png
 
 # login png-file
-  echo "Set Toy's basic login picture(Y)"
+  echo "Set Moebuntu basic login picture(Y)"
   echo -n " Or Original(or Example) login png-picture(N)?:"
   if ! askyn; then    
     read -p "Please drag-and-drop login png-file or push to set return(Example):" FileDrop

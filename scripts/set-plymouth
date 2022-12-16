@@ -90,10 +90,10 @@ echo " exist Moe Plymouth: `ls -d "$PlymothThemePath/$MoePlymouthDirName"`"
   sudo update-alternatives --set default.plymouth "$MoeAlternativesPath" >/dev/null 2>/dev/null
 
 # Change login screen
-echo " Set Toy's basic plymouse screen image (Y)"
+echo " Set Moebuntu basic plymouse screen image (Y)"
 echo -n "Or Set Original(or Example) plymouth png-file(N)?:"
 if askyn; then
-  # Toy's basic Change screen then not copy
+  # Moebuntu basic Change screen then not copy
   # Remove tempdir
   rm -rf $TempDir
   # Update-initramfs
