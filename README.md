@@ -70,7 +70,10 @@ Choices 20)~23) are used to set sounds (each version)
  
 Choices 24) are used to remove Moe-sound all.
 
-## 3.About forking and improving this "Moebuntu Setup Helper"
+## 3. Known Errors
+　In some parts of UBUNTU on Virtual-Box, there is a problem that the user-theme cannot be created. However, it was not possible to reproduce. If this happens, you should either set the theme with "Gnome Tweaks" or reboot.
+ 
+## 4.About forking and improving this "Moebuntu Setup Helper"
 This script is basically MIT licensed. So I think it would be nice to fork, for example, to create a local language version.
 But the themes, Plymouth, and Icons are made by Toy.
 Therefore, please create a script that downloads them from GitHub. (Do not include works such as Toy's theme in scripts.)
