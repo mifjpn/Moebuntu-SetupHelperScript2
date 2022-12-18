@@ -31,7 +31,7 @@ The "gnome-shell-extension-manager" window will open. What to do here is given a
 (Then please push Window-close button and close this window)
 
 That's all there is to do here.
- (Because: The reason for manipulating the GUI in this way is so that Gnome-Shell-Extention will gracefully react to changes in GNOME versions.)
+ (Because: The reason for manipulating the GUI in this way is so that Gnome-Shell-Extension will gracefully react to changes in GNOME versions.)
  
 Numbers 2) to 10) of choice are setups of 9 color "themes" that are each "Window Theme and Shell Theme Set".
 In those settings, you can change the login screen.
