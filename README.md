@@ -42,7 +42,7 @@ If You choose "N" for Oringinal or Example login images,
 A question for inputting images in PNG format for changes will appear.
 If you have a png image file you want to change, drag and drop it from nautilus file manager. If you press return without entering anything,you ask "Apply the cute image of anime-style Metan-chan (Reconstruction from the Great East Japan Earthquake-Japan's Great Disaster-Character)?(Y/N)" and you press Y,the cute metan-chan image will be specified.
 
-If you choose "11)remove Moebuntu theme(Reset to Yaru)", the 9-color theme file of Moebuntu will be deleted, and the default setting of "Yaru" will be restored.
+If you choose "11) remove Moe-theme", the 9-color theme file of Moebuntu will be deleted, and the default setting of "Yaru" will be restored.
 
 The choices for "12) and 13)" are items to set or remove Moe-Pink-Icon (kawaii icons).
 
