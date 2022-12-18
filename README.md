@@ -40,7 +40,7 @@ If you want to change to Moebuntu basic login screen, type "Y" to the "Set Moebu
  Or Original(or Example) login png-picture(N)?:" question.
 If You choose "N" for Oringinal or Example login images,
 A question for inputting images in PNG format for changes will appear.
-If you have a png image file you want to change, drag and drop it from nautilus file mamager. If you press return without entering anything,you ask "Apply the cute image of anime-style Metan-chan (Reconstruction from the Great East Japan Earthquake-Japan's Great Disaster-Character)?(Y/N)" and you press Y,the cute metan-chan image will be specified.
+If you have a png image file you want to change, drag and drop it from nautilus file manager. If you press return without entering anything,you ask "Apply the cute image of anime-style Metan-chan (Reconstruction from the Great East Japan Earthquake-Japan's Great Disaster-Character)?(Y/N)" and you press Y,the cute metan-chan image will be specified.
 
 If you choose "11)remove Moebuntu theme(Reset to Yaru)", the 9-color theme file of Moebuntu will be deleted, and the default setting of "Yaru" will be restored.
 
