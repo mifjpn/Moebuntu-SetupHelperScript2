@@ -49,6 +49,19 @@ if [ "$1" = "install" ]; then
   if [ "$FileDrop" = "" ]; then
 # set default login picture
 # download default login picture
+    echo " You choose example image"
+    echo "Apply the cute image of anime-style Metan-chan"
+    echo " (Reconstruction from the Great East Japan Earthquake-Japan's Great Disaster-Character)?"
+    if ! askyn; then
+      echo " Can't apply desktop wallpaper"
+      # remove temp-dir
+      rm -rf $TempDir
+      echo ""
+      echo -n "Hit Any Key:"
+      read -r -n 1 -s answer
+      echo ""     
+      exit 0 
+    fi      
     echo " download example login picture=" 
     echo " download $MoeWallFileName"
     curl -L $MoeWallUrl --output "$TempDir/$MoeWallFileName"

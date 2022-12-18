@@ -111,6 +111,24 @@ read -p "Please drag-and-drop plymouth png-file or push to set return(Example):"
 if [ "$FileDrop" = "" ]; then
   # Null return
   # Set to default
+  echo " Choose example image"
+  echo "  Apply the cute image of anime-style Metan-chan"
+  echo "  (Reconstruction from the Great East Japan Earthquake-Japan's Great Disaster-Character)?"
+  if ! askyn; then
+    #Not choose
+    echo " apply Moebuntu basic Change screen"
+    # Remove tempdir
+    rm -rf $TempDir
+    # Update-initramfs
+    echo " update-initramfs"
+    echo " <wait a minute>"
+    sudo update-initramfs -u -k all 
+    echo "Done"
+    echo -n "Hit Any Key:"
+    read -r -n 1 -s answer  
+    echo ""
+    exit 0
+  fi
   echo " download default login picture"
   curl -L $PlymouthDefaultPngUrl --output "$TempDir/$PlymouthDefaultFileName"
   # Set default plymouth picture
