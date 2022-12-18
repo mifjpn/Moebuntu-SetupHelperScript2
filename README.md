@@ -22,7 +22,7 @@ When the script runs, "Moebuntu Setting Helper" will appear.
 ### 3)How to use "Moebuntu Setting Helper"
 You can see the selection screen of many setup items.
 Here, the first setup item you must do is "1) base setting(Do first!)".
-The "gnome-shell-extension-manager" window will open. What to do here is given as instructions to this helper. They are:
+The "gnome-shell-extension-manager" window will open. What to do here is given as instructions from this helper. They are:
 
 1. Search for "User Themes" in the "Browse" tab
 2. Click the "Add" button to install
