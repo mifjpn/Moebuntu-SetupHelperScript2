@@ -40,7 +40,8 @@ If you want to change to Moebuntu basic login screen, type "Y" to the "Set Moebu
  Or Original(or Example) login png-picture(N)?:" question.
 If You choose "N" for Oringinal or Example login images,
 A question for inputting images in PNG format for changes will appear.
-If you have a png image file you want to change, drag and drop it from nautilus file mamager. If you press return without entering anything, the example-image will be specified.
+If you have a png image file you want to change, drag and drop it from nautilus file mamager. If you press return without entering anything,you ask "Apply the cute image of anime-style Metan-chan (Reconstruction from the Great East Japan Earthquake-Japan's Great Disaster-Character)?(Y/N)" and you press Y,the cute metan-chan image will be specified.
+
 If you choose "11)remove Moebuntu theme(Reset to Yaru)", the 9-color theme file of Moebuntu will be deleted, and the default setting of "Yaru" will be restored.
 
 The choices for "12) and 13)" are items to set or remove Moe-Pink-Icon (kawaii icons).
@@ -49,14 +50,14 @@ The choices for "12) and 13)" are items to set or remove Moe-Pink-Icon (kawaii i
 If you want to set Moebuntu basic screen image, type "Y" in "Set Moebuntu basic plymouse screen image (Y)
 Or Set Original(or Example) plymouth png-file(N)?:". 
 If you choose "N" for using the original PNG image file as a plymouth image, drag and drop the PNG image file from the nautilus file manager.
-If you press the return key without entering anything, the example PNG image will be specified.
+If you press the return key without entering anything,you ask "Apply the cute image of anime-style Metan-chan (Reconstruction from the Great East Japan Earthquake-Japan's Great Disaster-Character)?(Y/N)" and you press Y,the cute metan-chan image will be specified.
 (Note that the PNG image will be displayed in tiles. If you want a single image, you must match the resolution of your display.)
 "15) remove Moe-spinner plymouth" sets back to the default Plymouth where the default "UBUNTU spinner" is displayed.
 
 The "16) '' choices are used to switch the example background of the screen to a Moe image(Kawaii image)  pasting the "Moebuntu logo''
 
 You will be asked "Please drag-and-drop wall jpg-file or push to set return (Example):", so if you want to change the desktop wallpaper,drag and drop the JPG image file from the nautilus file manager.
-If you press the return key without entering anything, the example JPG image will be specified.
+If you press the return key without entering anything,you ask "Apply the cute image of anime-style Metan-chan (Reconstruction from the Great East Japan Earthquake-Japan's Great Disaster-Character)?(Y/N)" and you press Y,the cute metan-chan image will be specified.
 
 If you choose "17)", the background will return to the default background screen of "UBUNTU".
 
