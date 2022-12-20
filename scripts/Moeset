@@ -62,7 +62,7 @@ options=( 'base setting(Do first!)'
 select opt in "${options[@]}"
 do
   case $opt in
-    "base setting(Do first!)'")
+    "base setting(Do first!)")
       /bin/bash install-GSM;
       break
     ;;
