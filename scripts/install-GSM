@@ -2,8 +2,8 @@
 
 extman(){
     echo "1.Search for \"User Themes\" in the \"Browse\" tab"
-    echo "2.Click the \"Add\" button to install"
-    echo "3.Go to the \"Added\" tab and activate the Extension by setting the switch on the header to \"ON\" (to the right)"
+    echo "2.Click the \"Install\" button to install"
+    echo "3.Go to the \"Installed\" tab and activate the Extension by setting the switch on the header to \"ON\" (to the right)"
     echo " If there is no switch in the header and there is a switch in \"use extention\", please turn it \"ON\" (slide to the right)."
     echo "4.turn on the switch to the right of \"User Themes\""
 extension-manager 2> /dev/null
