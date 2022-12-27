@@ -1,11 +1,32 @@
 # Moebuntu-SetupHelperScript 2
 Moebuntu Setup Helper Script for Repository:Moebuntu-kawaiiUbuntu-ToysOriginal
+
+<img src="https://i.imgur.com/huERBwS.png" width="400" height="331">
+
 ## 1.Overview of this setup helper
 This setup helper is for the ”[mifjpn/Moebuntu-kawaiiUbuntu-ToysOriginal](https://github.com/mifjpn/Moebuntu-kawaiiUbuntu-ToysOriginal)'' repository.
 The repository has a collection of nine moe (or kawaii) color themes.
 In addition, it also includes a Moe (or Kawaii) theme for Plymouth (ie the screen when the OS loads).
 And also include a Moe (or Kawaii) Sounds.
 This setup helper is intended to make setting them up easier.
+
+### Supplement
+Since Moe will save the earth, Moebuntu will cooperate with the reconstruction support for the Great East Japan Earthquake through moe (script), and these characters are also helping. It is compatible with the color theme of Moebuntu, and it is possible to create a moe desktop for reconstruction support characters.
+
+[Tohoku Zunko Official HP](https://zunko.jp/)
+
+<img src="https://i.imgur.com/mxxZoJa.png" width="400" height="336">
+
+[Tohoku Zunko/Wikipedia](https://ja.wikipedia.org/wiki/%E6%9D%B1%E5%8C%97%E3%81%9A%E3%82%93%E5%AD%90 )
+
+>Tohoku Zunko is a general term for girls' characters with zunda mochi motifs and related content by SSS LLC.
+> Appeared in 2011 to support the recovery of the Tohoku region from the Great East Japan Earthquake, and Tohoku Zunko as a character is free of charge for POP advertisements and products for companies that have their headquarters registered in the Tohoku region without any procedures. It can be used commercially for packages, websites, etc. Also, if it is for non-commercial use, it can be used free of charge without any procedures, not limited to the six prefectures of Tohoku.
+
+The main helper(image samples etc.) was Metan Shikoku.
+
+<img src="https://zunko.jp/sozai/methane_s/zzm_met007.png" width="250" height="428">
+
+We would like to express our gratitude to all the artists who have been granted free use after the second stage images. thank you.
 
 ## 2.How to use
 ### 1)Operating system environment, download and preparation.
