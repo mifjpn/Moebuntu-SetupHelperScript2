@@ -28,7 +28,14 @@ The main helper(image samples etc.) was Metan Shikoku.
 
 We would like to express our gratitude to all the artists who have been granted free use after the second stage images. thank you.
 
-## 2.How to use
+## 2.There is a commentary page on YOUTUBE with the following three usage patterns.
+## [Moebuntu Setup Helper2 Main page](https://metanchan.hatenablog.com/entry/2022/12/25/090348)
+
+In the application, there is an introduction of SPYxFAMILY in the sample image prepared by yourself (original image explanation on YOUTUBE).
+
+<img src="https://cdn-ak.f.st-hatena.com/images/fotolife/m/metanchan/20221221/20221221125843.png" width="320" height="182">
+
+## 3.How to use
 ### 1)Operating system environment, download and preparation.
 Please prepare "UBUNTU22.04Lts".
 This script should work on this OS.
