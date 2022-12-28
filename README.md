@@ -1,4 +1,4 @@
-# Moebuntu-SetupHelperScript 2
+﻿# Moebuntu-SetupHelperScript 2
 Moebuntu Setup Helper Script for Repository:Moebuntu-kawaiiUbuntu-ToysOriginal
 
 <img src="https://i.imgur.com/huERBwS.png" width="400" height="331">
@@ -84,7 +84,7 @@ If you press the return key without entering anything,you ask "Apply the cute im
 
 The "16) '' choices are used to switch the example background of the screen to a Moe image(Kawaii image)  pasting the "Moebuntu logo''
 
-You will be asked "Please drag-and-drop wall jpg-file or push to set return (Example):", so if you want to change the desktop wallpaper,drag and drop the JPG image file from the nautilus file manager.
+You will be asked "Please drag-and-drop wall JPG or PNG inage file or push to set return (Example):", so if you want to change the desktop wallpaper,drag and drop the JPG or PNG image file from the nautilus file manager.
 If you press the return key without entering anything,you ask "Apply the cute image of anime-style Metan-chan (Reconstruction from the Great East Japan Earthquake-Japan's Great Disaster-Character)?(Y/N)" and you press Y,the cute metan-chan image will be specified.
 
 If you choose "17)", the background will return to the default background screen of "UBUNTU".

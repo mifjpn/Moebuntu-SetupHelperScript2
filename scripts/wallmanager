@@ -1,11 +1,15 @@
 #!/bin/bash
 #==== MoeIcon variable ====
+MoeBasicWallUrl="https://github.com/mifjpn/Moebuntu-kawaiiUbuntu-ToysOriginal/raw/22.04Lts/themes/bg-basic.jpg"
+MoeBasicWallFileName=`echo $MoeBasicWallUrl|awk -F"/" '{print $NF}'`
 MoeWallUrl="https://github.com/mifjpn/Moebuntu-kawaiiUbuntu-ToysOriginal/raw/22.04Lts/themes/bg-default.jpg"
 MoeWallFileName=`echo $MoeWallUrl|awk -F"/" '{print $NF}'`
 SYSWallDir="/usr/share/backgrounds"
 DefaultWallFileName="warty-final-ubuntu.png"
 TempDir="Moebuntu.temp"
 ConstMoeWallFileName="moe_wall.jpg"
+ConstWallFileNameJpg="moe_wall.jpg"
+ConstWallFileNamePng="moe_wall.png"
 
 # Install curl
 InstallCurl() {
@@ -42,10 +46,10 @@ fi
 # install or remove?
 if [ "$1" = "install" ]; then
   # install
-  echo "=Install $MoeWallFileName="
+  echo "=Install Desktop Wallpaper="
   InstallCurl;
   # Ask filename of wallpaper
-  read -p "Please drag-and-drop wall jpg-file or push to set return(Example):" FileDrop
+  read -p "Please drag-and-drop wall jpg or png image file or push to set return(Example):" FileDrop
   if [ "$FileDrop" = "" ]; then
 # set default login picture
 # download default login picture
@@ -94,6 +98,26 @@ if [ "$1" = "install" ]; then
       exit 0   
     fi
     echo " copy $WallFileFullPath to $SYSWallDir"
+    FileName=`echo $WallFileFullPath|awk -F"/" '{print $NF}'`
+    FileExtension=`echo ${FileName##*.}`
+    echo "Extention is $FileExtension"
+    if [ $FileExtension = "jpg" ] || [ $FileExtension = "JPG" ]; then
+      ConstMoeWallFileName=$ConstWallFileNameJpg
+    elif [ $FileExtension = "png" ] || [ $FileExtension = "PNG" ]; then
+      ConstMoeWallFileName=$ConstWallFileNamePng
+    else
+      echo "extention is not jpg or png."
+      echo "please drag and drop jpg or png image file."
+      echo "can not change desktop wallpaper"
+     # remove temp-dir
+      rm -rf $TempDir
+      echo ""
+      echo -n "Hit Any Key:"
+      read -r -n 1 -s answer
+      echo ""     
+      exit 0 
+    fi
+    echo " copy $WallFileFullPath to $SYSWallDir"
     sudo cp "$WallFileFullPath" "$SYSWallDir/$ConstMoeWallFileName"
     echo " setting to $WallFileFullPath"
     gsettings set org.gnome.desktop.background picture-uri "file://$SYSWallDir/$ConstMoeWallFileName"
@@ -109,14 +133,18 @@ if [ "$1" = "install" ]; then
   fi
   # remove
 elif [ "$1" = "remove" ]; then
-  echo "=Remove $MoeWallFileName and set detault="
+  echo "=Remove Moe desktop wallpaper ${MoeWallFileName%.*} and set detault="
   echo " seting to $DefaultWallFileName"
   gsettings set org.gnome.desktop.background picture-uri "file://$SYSWallDir/$DefaultWallFileName"
   gsettings set org.gnome.desktop.background picture-uri-dark "file://$SYSWallDir/$DefaultWallFileName"
   # if exsist remove MoeBuntuWall
-  if [ -e "$SYSWallDir/$ConstMoeWallFileName" ]; then
-    echo " Remove $SYSWallDir/$ConstMoeWallFileName"
-    sudo rm "$SYSWallDir/$ConstMoeWallFileName"
+  if [ -e "$SYSWallDir/$ConstWallFileNameJpg" ]; then
+    echo " remove $SYSWallDir/$ConstWallFileNameJpg"
+    sudo rm "$SYSWallDir/$ConstWallFileNameJpg"
+  fi
+  if [ -e "$SYSWallDir/$ConstWallFileNamePng" ]; then
+    echo " remove $SYSWallDir/$ConstWallFileNamePng"
+    sudo rm "$SYSWallDir/$ConstWallFileNamePng"
   fi
   echo "Done"
   echo ""
