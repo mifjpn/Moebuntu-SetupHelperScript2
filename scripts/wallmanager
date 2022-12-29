@@ -22,6 +22,18 @@ InstallCurl() {
   fi
   echo ""
 }
+
+# Install imagemagick-2212291856
+InstallImagemagick() {
+echo " Install imagemagick"
+dpkg -s imagemagick >/dev/null 2>&1
+if [ ! $? -eq 0 ]; then
+  sudo apt install -y imagemagick
+  else
+      echo " Already Installed"
+fi
+}
+
 #Ask Yn
 askyn() {
   echo -n "(Y/N)? "
@@ -48,8 +60,9 @@ if [ "$1" = "install" ]; then
   # install
   echo "=Install Desktop Wallpaper="
   InstallCurl;
+  InstallImagemagick;
   # Ask filename of wallpaper
-  read -p "Please drag-and-drop wall jpg or png image file or push to set return(Example):" FileDrop
+  read -p "Please drag-and-drop wall (png etc) image file or push only return to set example image:" FileDrop
   if [ "$FileDrop" = "" ]; then
 # set default login picture
 # download default login picture
@@ -107,15 +120,36 @@ if [ "$1" = "install" ]; then
       ConstMoeWallFileName=$ConstWallFileNamePng
     else
       echo "extention is not jpg or png."
-      echo "please drag and drop jpg or png image file."
-      echo "can not change desktop wallpaper"
-     # remove temp-dir
+      echo " convert to png file"
+      # convert to png
+      ConstMoeWallFileName=$ConstWallFileNamePng
+      echo "FileExtension is $FileExtension"
+      echo " Convert $WallFileFullPath to $TempDir/$ConstMoeWallFileName"
+      ReturnValue=`convert $WallFileFullPath $TempDir/$ConstMoeWallFileName`
+      if [ "$ReturnValue" != "" ]; then
+        echo "Can't convert to PNG-image"
+        echo "Can not change wallpaper picture"
+        # remove temp-dir
+        rm -rf $TempDir
+        echo ""
+        echo -n "Hit Any Key:"
+        read -r -n 1 -s answer
+        echo ""     
+        exit 0
+      fi
+      sudo cp "$TempDir/$ConstMoeWallFileName" "$SYSWallDir/$ConstMoeWallFileName"
+      echo "Done"
+      echo " setting $TempDir/$ConstMoeWallFileName to $SYSWallDir/$ConstMoeWallFileName"
+      gsettings set org.gnome.desktop.background picture-uri "file://$SYSWallDir/$ConstMoeWallFileName"
+      gsettings set org.gnome.desktop.background picture-uri-dark "file://$SYSWallDir/$ConstMoeWallFileName"
+      echo "Done"
+      echo " remove temp folder $TempDir"
       rm -rf $TempDir
       echo ""
       echo -n "Hit Any Key:"
       read -r -n 1 -s answer
-      echo ""     
-      exit 0 
+      echo ""
+      exit 0
     fi
     echo " copy $WallFileFullPath to $SYSWallDir"
     sudo cp "$WallFileFullPath" "$SYSWallDir/$ConstMoeWallFileName"
@@ -124,14 +158,21 @@ if [ "$1" = "install" ]; then
     gsettings set org.gnome.desktop.background picture-uri-dark "file://$SYSWallDir/$ConstMoeWallFileName"
     echo "Done"
     echo " remove temp folder $TempDir"
+     # remove temp-dir
     rm -rf $TempDir
     echo ""
     echo -n "Hit Any Key:"
     read -r -n 1 -s answer
-    echo ""
+    echo ""     
     exit 0 
   fi
-  # remove
+  rm -rf $TempDir
+  echo ""
+  echo -n "Hit Any Key:"
+  read -r -n 1 -s answer
+  echo ""
+  exit 0 
+# remove
 elif [ "$1" = "remove" ]; then
   echo "=Remove Moe desktop wallpaper ${MoeWallFileName%.*} and set detault="
   echo " seting to $DefaultWallFileName"

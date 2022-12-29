@@ -4,6 +4,7 @@ MoePlymouthURL="https://github.com/mifjpn/Moebuntu-kawaiiUbuntu-ToysOriginal/raw
 MoePlymouthFileName=`echo $MoePlymouthURL|awk -F"/" '{print $NF}'`
 MoePlymouthDirName="mmspinner"
 MoePlymouthBackGroundFile="/usr/share/plymouth/themes/mmspinner/background-tile.png"
+MoePlymouthBackGroungFileName=`echo $MoePlymouthBackGroundFile|awk -F"/" '{print $NF}'`
 PlymothThemePath="/usr/share/plymouth/themes"
 MoeAlternativesPath="/usr/share/plymouth/themes/mmspinner/mmspinner.plymouth"
 DetaultAlternativesPath="/usr/share/plymouth/themes/bgrt/bgrt.plymouth"
@@ -67,6 +68,15 @@ if [ ! $? -eq 0 ]; then
       echo " already Installed"
 fi
 
+# Install imagemagick-2212291856
+echo " Install imagemagick"
+dpkg -s imagemagick >/dev/null 2>&1
+if [ ! $? -eq 0 ]; then
+  sudo apt install -y imagemagick
+  else
+      echo " Already Installed"
+fi
+
 # Download Plymouth
 echo " download $MoePlymouthFileName "
 curl -L $MoePlymouthURL --output "$TempDir/$MoePlymouthFileName"
@@ -90,8 +100,9 @@ echo " exist Moe Plymouth: `ls -d "$PlymothThemePath/$MoePlymouthDirName"`"
   sudo update-alternatives --set default.plymouth "$MoeAlternativesPath" >/dev/null 2>/dev/null
 
 # Change login screen
-echo " Set Moebuntu basic plymouse screen image (Y)"
-echo -n "Or Set Original(or Example) plymouth png-file(N)?:"
+echo " Set Moebuntu basic plymouth screen image (Y)"
+# fix word for update 2212291928
+echo -n "Or Set Original(or Example) plymouth screen image(N)?:"
 if askyn; then
   # Moebuntu basic Change screen then not copy
   # Remove tempdir
@@ -107,7 +118,7 @@ if askyn; then
   exit 0
 fi
 # Choose Change Screen
-read -p "Please drag-and-drop plymouth png-file or push to set return(Example):" FileDrop
+read -p "Please drag-and-drop plymouth (png etc.)image file or push only return to set Example image:" FileDrop
 if [ "$FileDrop" = "" ]; then
   # Null return
   # Set to default
@@ -152,8 +163,32 @@ if [ "$FileDrop" = "" ]; then
     echo ""     
     exit 0   
   fi
-  echo " set Plymouth tile picture to $PlymouthFile"
-  sudo cp $PlymouthFile $MoePlymouthBackGroundFile
+  # file conversion-2212291856
+  FileName=`echo $PlymouthFile|awk -F"/" '{print $NF}'`
+  FileExtension=`echo ${FileName##*.}`
+  echo "FileExtension is $FileExtension"
+  if [ $FileExtension = "png" ] || [ $FileExtension = "PNG" ]; then  
+    echo " set Plymouth tile picture to $PlymouthFile"
+    sudo cp $PlymouthFile $MoePlymouthBackGroundFile
+    echo ""
+  else
+    echo " Convert $PlymouthFile to $TempDir/$MoePlymouthBackGroungFileName"
+    ReturnValue=`convert $PlymouthFile $TempDir/$MoePlymouthBackGroungFileName`
+    if [ "$ReturnValue" != "" ]; then
+      echo "Can't convert to PNG-image"
+      echo "Can not change Plymouth picture"
+      # remove temp-dir
+      rm -rf $TempDir
+      echo ""
+      echo -n "Hit Any Key:"
+      read -r -n 1 -s answer
+      echo ""     
+      exit 0
+    fi
+    sudo cp $TempDir/$MoePlymouthBackGroungFileName $MoePlymouthBackGroundFile
+    echo "Done"
+    echo ""
+  fi
 fi
 # remove temp-dir
 rm -rf $TempDir

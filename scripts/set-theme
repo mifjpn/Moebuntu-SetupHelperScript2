@@ -61,6 +61,15 @@ if [ ! $? -eq 0 ]; then
       echo " Already Installed"
 fi
 
+# Install imagemagick-2212291856
+echo " Install imagemagick"
+dpkg -s imagemagick >/dev/null 2>&1
+if [ ! $? -eq 0 ]; then
+  sudo apt install -y imagemagick
+  else
+      echo " Already Installed"
+fi
+
 # Download Theme
 echo " download $ThemeFileName"
 curl -L $ThemeUrl --output "$TempDir/$ThemeFileName"
@@ -102,9 +111,10 @@ if askyn; then
 
 # login png-file
   echo "Set Moebuntu basic login picture(Y)"
-  echo -n " Or Original(or Example) login png-picture(N)?:"
+  # sentence modified at 2212291859
+  echo -n " Or Original(or Example) login image(N)?:"
   if ! askyn; then    
-    read -p "Please drag-and-drop login png-file or push to set return(Example):" FileDrop
+    read -p "Please drag-and-drop login png(or other)image-file or push to only return to  set Example image:" FileDrop
     if [ "$FileDrop" = "" ]; then
       # set default login picture
       # download default login picture
@@ -144,9 +154,33 @@ if askyn; then
         echo ""     
         exit 0   
       fi
-      sudo cp $LoginFile /usr/share/themes/$ThemeDirName/gnome-shell/moebuntu_bg.png
-      echo "Done"
-      echo ""
+      # file conversion-2212291856
+      FileName=`echo $LoginFile|awk -F"/" '{print $NF}'`
+      FileExtension=`echo ${FileName##*.}`
+      echo "FileExtension is $FileExtension"
+      if [ $FileExtension = "png" ] || [ $FileExtension = "PNG" ]; then  
+        sudo cp $LoginFile /usr/share/themes/$ThemeDirName/gnome-shell/moebuntu_bg.png
+        echo "Done"
+        echo ""
+      else
+        echo " Convert $LoginFile to $TempDir/moebuntu_bg.png"
+        ReturnValue=`convert $LoginFile $TempDir/moebuntu_bg.png`
+        # echo " ReturnValue is $ReturnValue"
+        if [ "$ReturnValue" != "" ]; then
+          echo "Can't convert to PNG-image"
+          echo "Can not change login picture"
+          # remove temp-dir
+          rm -rf $TempDir
+          echo ""
+          echo -n "Hit Any Key:"
+          read -r -n 1 -s answer
+          echo ""     
+          exit 0
+        fi
+        sudo cp $TempDir/moebuntu_bg.png /usr/share/themes/$ThemeDirName/gnome-shell/moebuntu_bg.png
+        echo "Done"
+        echo ""
+      fi
     fi
   else
     echo "=set login to Moe-ized="
