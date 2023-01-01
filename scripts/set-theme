@@ -159,12 +159,12 @@ if askyn; then
       FileExtension=`echo ${FileName##*.}`
       echo "FileExtension is $FileExtension"
       if [ $FileExtension = "png" ] || [ $FileExtension = "PNG" ]; then  
-        sudo cp $LoginFile /usr/share/themes/$ThemeDirName/gnome-shell/moebuntu_bg.png
+        sudo cp "$LoginFile" /usr/share/themes/$ThemeDirName/gnome-shell/moebuntu_bg.png
         echo "Done"
         echo ""
       else
         echo " Convert $LoginFile to $TempDir/moebuntu_bg.png"
-        ReturnValue=`convert $LoginFile $TempDir/moebuntu_bg.png`
+        ReturnValue=`convert "$LoginFile" $TempDir/moebuntu_bg.png`
         # echo " ReturnValue is $ReturnValue"
         if [ "$ReturnValue" != "" ]; then
           echo "Can't convert to PNG-image"

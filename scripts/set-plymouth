@@ -169,11 +169,11 @@ if [ "$FileDrop" = "" ]; then
   echo "FileExtension is $FileExtension"
   if [ $FileExtension = "png" ] || [ $FileExtension = "PNG" ]; then  
     echo " set Plymouth tile picture to $PlymouthFile"
-    sudo cp $PlymouthFile $MoePlymouthBackGroundFile
+    sudo cp "$PlymouthFile" $MoePlymouthBackGroundFile
     echo ""
   else
     echo " Convert $PlymouthFile to $TempDir/$MoePlymouthBackGroungFileName"
-    ReturnValue=`convert $PlymouthFile $TempDir/$MoePlymouthBackGroungFileName`
+    ReturnValue=`convert "$PlymouthFile" $TempDir/$MoePlymouthBackGroungFileName`
     if [ "$ReturnValue" != "" ]; then
       echo "Can't convert to PNG-image"
       echo "Can not change Plymouth picture"
