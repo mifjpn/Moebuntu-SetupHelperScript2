@@ -31,6 +31,12 @@ We would like to express our gratitude to all the artists who have been granted 
 ## 2.There is a commentary page on YOUTUBE with the following three usage patterns.
 ## [Moebuntu Setup Helper2 Main page](https://metanchan.hatenablog.com/entry/2022/12/25/090348)
 
+[![](https://img.youtube.com/vi/ZTpgHq3rcw8/0.jpg)](https://www.youtube.com/watch?v=ZTpgHq3rcw8)
+
+[![](https://img.youtube.com/vi/usZva_ZqD1Y/0.jpg)](https://www.youtube.com/watch?v=usZva_ZqD1Y)
+
+[![](https://img.youtube.com/vi/GxM4_zTJxDM/0.jpg)](https://www.youtube.com/watch?v=GxM4_zTJxDM)
+
 In the application, there is an introduction of SPYxFAMILY in the sample image prepared by yourself (original image explanation on YOUTUBE).
 
 <img src="https://cdn-ak.f.st-hatena.com/images/fotolife/m/metanchan/20221221/20221221125843.png" width="320" height="182">
