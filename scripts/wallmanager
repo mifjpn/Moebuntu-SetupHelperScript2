@@ -99,7 +99,7 @@ if [ "$1" = "install" ]; then
   # FileDrop to login
     WallFileFullPath=`echo $FileDrop | tr -d \'`
     echo "=Set fileDrop $WallFileFullPath to Wallpicture="
-    if [ ! -e $WallFileFullPath ]; then
+    if [ ! -e "$WallFileFullPath" ]; then
       echo "File Not exist!"
       echo "Can not change Wallpaper"
       # remove temp-dir
@@ -125,7 +125,7 @@ if [ "$1" = "install" ]; then
       ConstMoeWallFileName=$ConstWallFileNamePng
       echo "FileExtension is $FileExtension"
       echo " Convert $WallFileFullPath to $TempDir/$ConstMoeWallFileName"
-      ReturnValue=`convert $WallFileFullPath $TempDir/$ConstMoeWallFileName`
+      ReturnValue=`convert "$WallFileFullPath" $TempDir/$ConstMoeWallFileName`
       if [ "$ReturnValue" != "" ]; then
         echo "Can't convert to PNG-image"
         echo "Can not change wallpaper picture"
