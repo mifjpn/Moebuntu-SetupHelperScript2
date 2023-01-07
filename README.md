@@ -31,6 +31,8 @@ We would like to express our gratitude to all the artists who have been granted 
 ## 2.There is a commentary page on YOUTUBE with the following three usage patterns.
 ## [Moebuntu Setup Helper2 Main page](https://metanchan.hatenablog.com/entry/2022/12/25/090348)
 
+The images below are clickable and can be viewed on YOUTUBE.
+
 [![](https://img.youtube.com/vi/ZTpgHq3rcw8/0.jpg)](https://www.youtube.com/watch?v=ZTpgHq3rcw8)
 
 [![](https://img.youtube.com/vi/usZva_ZqD1Y/0.jpg)](https://www.youtube.com/watch?v=usZva_ZqD1Y)
