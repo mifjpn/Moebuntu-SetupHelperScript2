@@ -110,6 +110,12 @@ Choices 24) are used to remove Moe-sound all.
 ## 3. Known Errors
 　In some parts of UBUNTU on Virtual-Box, there is a problem that the user-theme cannot be created. However, it was not possible to reproduce. If this happens, you should either set the theme with "Gnome Tweaks" or reboot.
  
+ If you upgrade your version of UBUNTU without reinstalling it, the initial basic setup may not work.
+```
+　sudo apt remove gnome-shell-extension-manager
+```
+As such, please remove the gnome-shell-extension-manager for basic settings once.
+ 
 ## 4.About forking and improving this "Moebuntu Setup Helper"
 This script is basically MIT licensed. So I think it would be nice to fork, for example, to create a local language version.
 But the themes, Plymouth, and Icons are made by Toy.
