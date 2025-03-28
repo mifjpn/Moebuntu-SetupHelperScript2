@@ -75,7 +75,7 @@ echo " download $ThemeFileName"
 curl -L $ThemeUrl --output "$TempDir/$ThemeFileName"
 
 # Unpack
-echo " unpack $ThemeFileName="
+echo " unpack $ThemeFileName"
 tar Jxfv "$TempDir/$ThemeFileName" -C $TempDir > /dev/null 2> /dev/null
 
 # set to themes Folder

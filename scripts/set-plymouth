@@ -123,8 +123,7 @@ if [ "$FileDrop" = "" ]; then
   # Null return
   # Set to default
   echo " Choose example image"
-  echo "  Apply the cute image of anime-style Metan-chan"
-  echo "  (Reconstruction from the Great East Japan Earthquake-Japan's Great Disaster-Character)?"
+  echo "  Apply the cute image of kawaii seamless pattern"
   if ! askyn; then
     #Not choose
     echo " apply Moebuntu basic Change screen"
