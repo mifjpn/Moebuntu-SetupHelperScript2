@@ -67,8 +67,7 @@ if [ "$1" = "install" ]; then
 # set default login picture
 # download default login picture
     echo " You choose example image"
-    echo "Apply the cute image of anime-style Metan-chan"
-    echo " (Reconstruction from the Great East Japan Earthquake-Japan's Great Disaster-Character)?"
+    echo "Apply the cute image of anime-style character drawed by Toy?"
     if ! askyn; then
       echo " Can't apply desktop wallpaper"
       # remove temp-dir

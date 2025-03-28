@@ -30,7 +30,7 @@ SoundMGd="https://github.com/mifjpn/Moebuntu-kawaiiUbuntu-ToysOriginal/raw/24.04
 menu() {
 clear
 echo -e $COL_GREEN" ------------------------------------------------------------------------------"
-echo -e "$COL_GREEN                          Moebuntu Setting Helper 2"
+echo -e "$COL_GREEN                   Moebuntu Setting Helper for 24.04Lts"
 echo -e $COL_GREEN" ------------------------------------------------------------------------------"$COL_RESET
 PS3='Please enter your choice: '
 options=( 'base setting(Do first!)'
@@ -52,6 +52,8 @@ options=( 'base setting(Do first!)'
           'remove Moe Wallpaper'
           'firefox to deb package'
           'firefox to snap package'
+          'nautilus to nemo'
+          'nemo to nautilus'
           'set Moesound_iori'
           'set Moesound_maid_iori'
           'set Moesound_SF_iori'
@@ -136,6 +138,14 @@ do
     ;;
     "firefox to snap package")
       /bin/bash firefox2snap ;
+      break
+    ;;
+    "nautilus to nemo")
+      /bin/bash nautilus2nemo ;
+      break
+    ;;
+    "nemo to nautilus")
+      /bin/bash nemo2nautilus ;
       break
     ;;
     "set Moesound_iori")
