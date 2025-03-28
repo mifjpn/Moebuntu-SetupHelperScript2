@@ -119,8 +119,7 @@ if askyn; then
       # set default login picture
       # download default login picture
       echo " download default login picture=" 
-      echo " Apply the cute image of anime-style Metan-chan"
-      echo " (Reconstruction from the Great East Japan Earthquake-Japan's Great Disaster-Character)?"
+      echo " Apply the cute image of anime-style made by Toy?"
       if ! askyn; then
         # not apply
         echo " apply Moebuntu basic login picture"

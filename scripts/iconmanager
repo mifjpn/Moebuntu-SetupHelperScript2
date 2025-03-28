@@ -1,6 +1,6 @@
 #!/bin/bash
 #==== MoeIcon variable ====
-MoeIconUrl="https://github.com/mifjpn/Moebuntu-kawaiiUbuntu-ToysOriginal/raw/22.04Lts/icons/MoePinkIcons_201117.tar.xz"
+MoeIconUrl="https://github.com/mifjpn/Moebuntu-kawaiiUbuntu-ToysOriginal/raw/24.04Lts/icons/MoePinkIcons_201117.tar.xz"
 MoeIconFileName=`echo $MoeIconUrl|awk -F"/" '{print $NF}'`
 MoeIconDirName=`echo $MoeIconFileName|awk '{print substr($0,0,index($0,"_")-1)}'`
 MoeIconName=$MoeIconDirName

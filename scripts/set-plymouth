@@ -1,6 +1,6 @@
 #!/bin/bash
 # global variable
-MoePlymouthURL="https://github.com/mifjpn/Moebuntu-kawaiiUbuntu-ToysOriginal/raw/22.04Lts/plymouth/mmspinner.tar.xz"
+MoePlymouthURL="https://github.com/mifjpn/Moebuntu-kawaiiUbuntu-ToysOriginal/raw/24.04Lts/plymouth/mmspinner.tar.xz"
 MoePlymouthFileName=`echo $MoePlymouthURL|awk -F"/" '{print $NF}'`
 MoePlymouthDirName="mmspinner"
 MoePlymouthBackGroundFile="/usr/share/plymouth/themes/mmspinner/background-tile.png"
@@ -8,7 +8,7 @@ MoePlymouthBackGroungFileName=`echo $MoePlymouthBackGroundFile|awk -F"/" '{print
 PlymothThemePath="/usr/share/plymouth/themes"
 MoeAlternativesPath="/usr/share/plymouth/themes/mmspinner/mmspinner.plymouth"
 DetaultAlternativesPath="/usr/share/plymouth/themes/bgrt/bgrt.plymouth"
-PlymouthDefaultPngUrl="https://github.com/mifjpn/Moebuntu-kawaiiUbuntu-ToysOriginal/raw/22.04Lts/plymouth/plymouth-default.png"
+PlymouthDefaultPngUrl="https://github.com/mifjpn/Moebuntu-kawaiiUbuntu-ToysOriginal/raw/24.04Lts/plymouth/plymouth-default.png"
 PlymouthDefaultFileName=`echo $PlymouthDefaultPngUrl|awk -F"/" '{print $NF}'`
 TempDir="Moebuntu.temp"
 

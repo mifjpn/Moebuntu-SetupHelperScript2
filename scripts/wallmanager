@@ -1,8 +1,8 @@
 #!/bin/bash
 #==== MoeIcon variable ====
-MoeBasicWallUrl="https://github.com/mifjpn/Moebuntu-kawaiiUbuntu-ToysOriginal/raw/22.04Lts/themes/bg-basic.jpg"
+MoeBasicWallUrl="https://github.com/mifjpn/Moebuntu-kawaiiUbuntu-ToysOriginal/raw/24.04Lts/themes/bg-basic.jpg"
 MoeBasicWallFileName=`echo $MoeBasicWallUrl|awk -F"/" '{print $NF}'`
-MoeWallUrl="https://github.com/mifjpn/Moebuntu-kawaiiUbuntu-ToysOriginal/raw/22.04Lts/themes/bg-default.jpg"
+MoeWallUrl="https://github.com/mifjpn/Moebuntu-kawaiiUbuntu-ToysOriginal/raw/24.04Lts/themes/bg-default.jpg"
 MoeWallFileName=`echo $MoeWallUrl|awk -F"/" '{print $NF}'`
 SYSWallDir="/usr/share/backgrounds"
 DefaultWallFileName="warty-final-ubuntu.png"

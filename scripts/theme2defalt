@@ -14,47 +14,47 @@ asksure() {
 }
 removeallmoethemes() {
   echo "=Remove MoeAllColor theme="
-  if [ -d /usr/share/themes/Moe-Green16 ]; then
-    sudo rm -rf /usr/share/themes/Moe-Green16
+  if [ -d /usr/share/themes/Moe-Green17 ]; then
+    sudo rm -rf /usr/share/themes/Moe-Green17
   fi
-  if [ -d /usr/share/themes/Moe-BlueGreen16 ]; then
-    sudo rm -rf /usr/share/themes/Moe-BlueGreen16
+  if [ -d /usr/share/themes/Moe-BlueGreen17 ]; then
+    sudo rm -rf /usr/share/themes/Moe-BlueGreen17
   fi  
-  if [ -d /usr/share/themes/Moe-Navy16 ]; then
-    sudo rm -rf /usr/share/themes/Moe-Navy16
+  if [ -d /usr/share/themes/Moe-Navy17 ]; then
+    sudo rm -rf /usr/share/themes/Moe-Navy17
   fi
-  if [ -d /usr/share/themes/Moe-Purple16 ]; then
-    sudo rm -rf /usr/share/themes/Moe-Purple16
+  if [ -d /usr/share/themes/Moe-Purple17 ]; then
+    sudo rm -rf /usr/share/themes/Moe-Purple17
   fi
-  if [ -d /usr/share/themes/Moe-Red16 ]; then
-    sudo rm -rf /usr/share/themes/Moe-Red16
+  if [ -d /usr/share/themes/Moe-Red17 ]; then
+    sudo rm -rf /usr/share/themes/Moe-Red17
   fi
-  if [ -d /usr/share/themes/Moe-Orange16 ]; then
-     sudo rm -rf /usr/share/themes/Moe-Orange16
+  if [ -d /usr/share/themes/Moe-Orange17 ]; then
+     sudo rm -rf /usr/share/themes/Moe-Orange17
   fi
-  if [ -d /usr/share/themes/Moe-Yellow16 ]; then
-    sudo rm -rf /usr/share/themes/Moe-Yellow16
+  if [ -d /usr/share/themes/Moe-Yellow17 ]; then
+    sudo rm -rf /usr/share/themes/Moe-Yellow17
   fi
-  if [ -d /usr/share/themes/Moe-Blue16 ]; then
-    sudo rm -rf /usr/share/themes/Moe-Blue16
+  if [ -d /usr/share/themes/Moe-Blue17 ]; then
+    sudo rm -rf /usr/share/themes/Moe-Blue17
   fi
-  if [ -d /usr/share/themes/Moe-Pink16 ]; then
-    sudo rm -rf /usr/share/themes/Moe-Pink16
+  if [ -d /usr/share/themes/Moe-Pink17 ]; then
+    sudo rm -rf /usr/share/themes/Moe-Pink17
   fi
   echo "Done"
 }
 
 removethemealtanatives() {
 echo "=Remove all Moe GDM altanetives="
-  sudo update-alternatives --remove gdm-theme.gresource /usr/share/themes/Moe-Green16/gnome-shell/gnome-shell-theme.gresource
-  sudo update-alternatives --remove gdm-theme.gresource /usr/share/themes/Moe-BlueGreen16/gnome-shell/gnome-shell-theme.gresource
-  sudo update-alternatives --remove gdm-theme.gresource /usr/share/themes/Moe-Navy16/gnome-shell/gnome-shell-theme.gresource
-  sudo update-alternatives --remove gdm-theme.gresource /usr/share/themes/Moe-Purple16/gnome-shell/gnome-shell-theme.gresource
-  sudo update-alternatives --remove gdm-theme.gresource /usr/share/themes/Moe-Red16/gnome-shell/gnome-shell-theme.gresource
-  sudo update-alternatives --remove gdm-theme.gresource /usr/share/themes/Moe-Orange16/gnome-shell/gnome-shell-theme.gresource
-  sudo update-alternatives --remove gdm-theme.gresource /usr/share/themes/Moe-Yellow16/gnome-shell/gnome-shell-theme.gresource
-  sudo update-alternatives --remove gdm-theme.gresource /usr/share/themes/Moe-Blue16/gnome-shell/gnome-shell-theme.gresource
-  sudo update-alternatives --remove gdm-theme.gresource /usr/share/themes/Moe-Pink16/gnome-shell/gnome-shell-theme.gresource
+  sudo update-alternatives --remove gdm-theme.gresource /usr/share/themes/Moe-Green17/gnome-shell/gnome-shell-theme.gresource
+  sudo update-alternatives --remove gdm-theme.gresource /usr/share/themes/Moe-BlueGreen17/gnome-shell/gnome-shell-theme.gresource
+  sudo update-alternatives --remove gdm-theme.gresource /usr/share/themes/Moe-Navy17/gnome-shell/gnome-shell-theme.gresource
+  sudo update-alternatives --remove gdm-theme.gresource /usr/share/themes/Moe-Purple17/gnome-shell/gnome-shell-theme.gresource
+  sudo update-alternatives --remove gdm-theme.gresource /usr/share/themes/Moe-Red17/gnome-shell/gnome-shell-theme.gresource
+  sudo update-alternatives --remove gdm-theme.gresource /usr/share/themes/Moe-Orange17/gnome-shell/gnome-shell-theme.gresource
+  sudo update-alternatives --remove gdm-theme.gresource /usr/share/themes/Moe-Yellow17/gnome-shell/gnome-shell-theme.gresource
+  sudo update-alternatives --remove gdm-theme.gresource /usr/share/themes/Moe-Blue17/gnome-shell/gnome-shell-theme.gresource
+  sudo update-alternatives --remove gdm-theme.gresource /usr/share/themes/Moe-Pink17/gnome-shell/gnome-shell-theme.gresource
 echo "Done"
 }
 
