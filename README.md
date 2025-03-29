@@ -31,6 +31,7 @@ The "gnome-shell-extension-manager" window will open. What to do here is given a
 2. Click the "Add" button to install
 3. Go to the Added tab and activate the Extension by setting the button on the header to "ON" (to the right)
 4. turn on the button to the right of "User Themes"
+5. close the window
 (Then please push Window-close button and close this window)
 
 That's all there is to do here.
@@ -59,7 +60,7 @@ If you press the return key without entering anything,You will be asked to apply
 The "16) '' choices are used to switch the example background of the screen to a Moe image(Kawaii image)  pasting the "Moebuntu logo''
 
 You will be asked "Please drag-and-drop wall JPG or PNG(or other format) image file or push only return to set example:", so if you want to change the desktop wallpaper,drag and drop the JPG or PNG(or other format) image file from the nautilus file manager.
-If you press the return key without entering anything,you ask "Apply the cute image of anime-style Metan-chan (Reconstruction from the Great East Japan Earthquake-Japan's Great Disaster-Character)?(Y/N)" and you press Y,the cute metan-chan image will be specified.
+If you press the return key without entering anything,You will be asked to apply some example cute picture and you press Y,some cute image will be specified.
 
 If you choose "17)", the background will return to the default background screen of "UBUNTU".
 
