@@ -39,10 +39,10 @@ That's all there is to do here.
 Numbers 2) to 10) of choice are setups of 9 color "themes" that are each "Window Theme and Shell Theme Set".
 In those settings, you can change the login screen.
 If you want to change, type "Y" to the "Change login screen" question.
-If you want to change to Moebuntu basic login screen, type "Y" .You will be asked to apply some example cute pictures.
+If you want to change to Moebuntu basic login screen, type "Y" .You will be asked to apply some example cute picture.
 If You choose "N" for Original or Example login image,
 A question for inputting image in PNG format(or other formats) for changes will appear.
-If you have a png image(or other format image) file you want to change, drag and drop it from file manager. If you press return without entering anything,You will be asked to apply some example cute pictures and you press Y,some cute image will be specified.
+If you have a png image(or other format image) file you want to change, drag and drop it from file manager. If you press return without entering anything,You will be asked to apply some example cute picture and you press Y,some cute image will be specified.
 
 If you choose "11) remove Moe-theme", the 9-color theme file of Moebuntu will be deleted, and the default setting of "Yaru" will be restored.
 
