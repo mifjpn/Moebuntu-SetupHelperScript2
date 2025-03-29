@@ -42,7 +42,7 @@ If you want to change, type "Y" to the "Change login screen" question.
 If you want to change to Moebuntu basic login screen, type "Y" .You will be asked to apply some example cute pictures.
 If You choose "N" for Original or Example login image,
 A question for inputting image in PNG format(or other formats) for changes will appear.
-If you have a png image(or other format image) file you want to change, drag and drop it from file manager. If you press return without entering anything,you ask "Apply the cute image of anime-style Metan-chan (Reconstruction from the Great East Japan Earthquake-Japan's Great Disaster-Character)?(Y/N)" and you press Y,the cute metan-chan image will be specified.
+If you have a png image(or other format image) file you want to change, drag and drop it from file manager. If you press return without entering anything,You will be asked to apply some example cute pictures and you press Y,some cute image will be specified.
 
 If you choose "11) remove Moe-theme", the 9-color theme file of Moebuntu will be deleted, and the default setting of "Yaru" will be restored.
 
