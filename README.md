@@ -66,7 +66,7 @@ If you choose "17)", the background will return to the default background screen
 
 Choices 18) and 19) are used for Firefox to be the Deb version or the Snap version. The Deb version of Firefox can run with a Moe (Kawaii) theme.
 
-Choices 20) and 21) are used for changing Nautilus to nemo.The nemo can run with a Moe (Kawaii) theme.
+Choices 20) or 21) will add or remove the file manager nemo. nemo supports the Moe theme.
 
 Choices 22)~25) are used to set sounds (each version)
  Example version iori is made by aminetion amatur voice actor.
