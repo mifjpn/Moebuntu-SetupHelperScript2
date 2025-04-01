@@ -52,8 +52,8 @@ options=( 'base setting(Do first!)'
           'remove Moe Wallpaper'
           'firefox to deb package'
           'firefox to snap package'
-          'nautilus to nemo'
-          'nemo to nautilus'
+          'add nemo'
+          'remove nemo'
           'set Moesound_iori'
           'set Moesound_maid_iori'
           'set Moesound_SF_iori'
@@ -140,12 +140,12 @@ do
       /bin/bash firefox2snap ;
       break
     ;;
-    "nautilus to nemo")
-      /bin/bash nautilus2nemo ;
+    "add nemo")
+      /bin/bash addnemo ;
       break
     ;;
-    "nemo to nautilus")
-      /bin/bash nemo2nautilus ;
+    "remove nemo")
+      /bin/bash removenemo ;
       break
     ;;
     "set Moesound_iori")
