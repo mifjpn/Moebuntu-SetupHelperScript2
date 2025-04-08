@@ -9,7 +9,7 @@
 #  echo " Add nemo"
   echo " Install nemo"
   sudo apt update >/dev/null 2>/dev/null
-  sudo apt -y install nemo
+  sudo apt -y install nemo nemo-audio-tab nemo-compare nemo-dropbox nemo-emblems nemo-filename-repairer nemo-fileroller nemo-image-converter nemo-media-columns nemo-pastebin nemo-preview nemo-python nemo-seahorse nemo-share nemo-terminal
 #  echo " Install nemo to dock as favorite"
   echo ""
   echo -n "Hit Any Key:"
