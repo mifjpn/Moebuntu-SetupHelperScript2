@@ -1,0 +1,11 @@
+#!/bin/bash
+  echo "=Install dev vlc ="
+  echo " Install vlc"
+  sudo apt update >/dev/null 2>/dev/null
+  sudo apt -y install "vlc"
+  echo ""
+  echo -n "Hit Any Key:"
+  read -r -n 1 -s answer
+  echo ""
+
+

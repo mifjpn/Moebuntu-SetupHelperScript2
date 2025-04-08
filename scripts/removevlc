@@ -1,0 +1,11 @@
+#!/bin/bash
+  echo "=Remove dev vlc ="
+  echo " Remove vlc"
+  sudo apt update >/dev/null 2>/dev/null
+  sudo apt -y remove "vlc"
+  echo ""
+  echo -n "Hit Any Key:"
+  read -r -n 1 -s answer
+  echo ""
+
+
