@@ -52,8 +52,10 @@ options=( 'base setting(Do first!)'
           'remove Moe Wallpaper'
           'firefox to deb package'
           'firefox to snap package'
-          'add nemo'
-          'remove nemo'
+          'add thunar'
+          'remove thunar'
+          'add vlc(deb)'
+          'remove vlc(deb)'
           'set Moesound_iori'
           'set Moesound_maid_iori'
           'set Moesound_SF_iori'
@@ -140,12 +142,20 @@ do
       /bin/bash firefox2snap ;
       break
     ;;
-    "add nemo")
-      /bin/bash addnemo ;
+    "add thunar")
+      /bin/bash addthunar;
       break
     ;;
-    "remove nemo")
-      /bin/bash removenemo ;
+    "remove thunar")
+      /bin/bash removethunar ;
+      break
+    ;;
+    "add vlc(deb)")
+      /bin/bash addvlc;
+      break
+    ;;
+    "remove vlc(deb)")
+      /bin/bash removevlc ;
       break
     ;;
     "set Moesound_iori")
