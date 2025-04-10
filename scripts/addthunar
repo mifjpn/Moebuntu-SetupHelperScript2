@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #if ! [ -e /etc/apt/preferences.d/mozillateamppa ]; then
-  echo "=Install nemo ="
-  echo " add nemo-icon to dock as favorite"
+  echo "=Install thunar ="
+  echo " add thuner-icon to dock as favorite"
   tmp=`gsettings get org.gnome.shell favorite-apps`
   tmp=`echo $tmp |  sed -e "s/'org.gnome.Nautilus.desktop',/'org.gnome.Nautilus.desktop','thunar.desktop',/g"`
   gsettings set org.gnome.shell favorite-apps "$tmp"  
