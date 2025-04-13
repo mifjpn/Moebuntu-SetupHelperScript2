@@ -1,0 +1,13 @@
+<action>
+	<icon>utilities-terminal</icon>
+	<name>端末で実行</name>
+	<submenu></submenu>
+	<unique-id>1743523409781016-2</unique-id>
+	<command>/bin/gnome-terminal --command %f</command>
+	<description>Execute on terminal </description>
+	<range></range>
+	<patterns>*</patterns>
+	<startup-notify/>
+	<other-files/>
+</action>
+

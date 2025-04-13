@@ -11,6 +11,13 @@
   sudo apt update >/dev/null 2>/dev/null
   sudo apt -y install "thunar*"
 #  echo " Install nemo to dock as favorite"
+  thunar&
+  sleep 3
+  sudo killall thunar
+  if [ ! -e ~/.config/Thunar/uca.xml.bak ]; then
+  cp ~/.config/Thunar/uca.xml ~/.config/Thunar/uca.xml.bak
+    sed -i $'/<\/actions>/{e cat ./thunar-execute-script.txt\n}' ~/.config/Thunar/uca.xml
+  fi
   echo ""
   echo -n "Hit Any Key:"
   read -r -n 1 -s answer
