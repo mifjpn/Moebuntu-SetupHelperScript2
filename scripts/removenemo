@@ -10,8 +10,8 @@
 
   echo " Remove nemo"
 #    echo "  CAUTION!!:if remove command is waited longtime,stop this script(quit at Window-close button or ^c) and run update-manager for update all snap!!"
-  sudo apt remove -y --purge nemo nemo >/dev/null 2>/dev/null
-  sudo apt remove -y --autoremove >/dev/null 2>/dev/null
+  sudo apt remove -y --purge nemo nemo
+  sudo apt remove -y --autoremove 
   echo ""
   echo -n "Hit Any Key:"
   read -r -n 1 -s answer
