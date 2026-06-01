@@ -1,37 +1,118 @@
 #!/bin/bash
+# Kawaiintu Setup Helper - Firefox Snap to Deb Converter
 
-#if ! [ -e /etc/apt/preferences.d/mozillateamppa ]; then
-  echo "=Remove snap firefox and Install deb firefox="
-  echo " remove deb-firefox from dock as favorite"
-  tmp=`gsettings get org.gnome.shell favorite-apps`
-  tmp=`echo $tmp |  sed -e "s/'firefox.desktop', //g"`
-  gsettings set org.gnome.shell favorite-apps "$tmp"  
-  tmp=`gsettings get org.gnome.shell favorite-apps`
-  tmp=`echo $tmp | sed -e "s/'firefox_firefox.desktop', //g"`
-  gsettings set org.gnome.shell favorite-apps "$tmp"
-  #snap list contain firefox?
-  if snap list | grep -q -n firefox; then
-    echo " remove snap firefox"
-    echo "  CAUTION!!:if remove command is waited longtime,stop this script(quit at Window-close button or ^c) and run update-manager for update all snap!!"
-    sudo snap remove --purge firefox
-    sudo apt remove -y --autoremove firefox >/dev/null 2>/dev/null
-  fi
-  echo " add deb-firefox repository"
-  sudo add-apt-repository -y ppa:mozillateam/ppa >/dev/null 2>/dev/null
-  echo " set deb-firefox update preference"
-  sudo cp mozillateamppa /etc/apt/preferences.d/
-  echo " install deb-firefox"
-  sudo apt update >/dev/null 2>/dev/null
-  sudo apt -y install firefox
-  echo " install deb-firefox to dock as favorite"
-  tmp=`gsettings get org.gnome.shell favorite-apps`
-  tmp=`echo $tmp | sed s/\\\\[/"['firefox.desktop',"/`
-  gsettings set org.gnome.shell favorite-apps "$tmp"
-  echo " check update preferens"
-  apt-cache policy firefox
-  echo ""
-  echo -n "Hit Any Key:"
-  read -r -n 1 -s answer
-  echo ""
-#fi
+echo -e "\x1b[36;01m=========================================\x1b[39;49;00m"
+echo -e "\x1b[36;01m    Converting Firefox from Snap to Deb  \x1b[39;49;00m"
+echo -e "\x1b[36;01m=========================================\x1b[39;49;00m"
 
+# 1. Remove Snap version
+if snap list | grep -q firefox; then
+  echo ">> Removing snap version of Firefox..."
+  echo "   (Note: If this takes too long, abort (Ctrl+C), run 'sudo snap refresh', and try again)"
+  sudo snap remove --purge firefox
+  sudo apt remove -y firefox >/dev/null 2>&1
+else
+  echo ">> Snap version of Firefox is not installed."
+fi
+
+# 2. Add Mozilla Team PPA
+echo ">> Adding Mozilla Team PPA..."
+sudo add-apt-repository -y ppa:mozillateam/ppa >/dev/null 2>&1
+
+# 3. Configure APT Preferences
+echo ">> Setting APT preferences to prioritize Deb over Snap..."
+sudo bash -c 'cat <<EOF > /etc/apt/preferences.d/99mozillateamppa
+Package: firefox*
+Pin: release o=LP-PPA-mozillateam
+Pin-Priority: 1001
+
+Package: firefox*
+Pin: release o=Ubuntu
+Pin-Priority: -1
+EOF'
+
+# 4. Install Deb version
+echo ">> Installing Deb version of Firefox..."
+sudo apt update >/dev/null 2>&1
+sudo apt -y install firefox
+
+# ---------------------------------------------------------
+# 5. Fix Firefox Icon & Force Cache Refresh
+# ---------------------------------------------------------
+echo ">> Fixing Firefox icon to match the theme..."
+LOCAL_APP_DIR="$HOME/.local/share/applications"
+mkdir -p "$LOCAL_APP_DIR"
+
+if [ -f /usr/share/applications/firefox.desktop ]; then
+    cp /usr/share/applications/firefox.desktop "$LOCAL_APP_DIR/"
+    # アイコン指定を強制書き換え
+    sed -i 's/^Icon=.*/Icon=firefox/' "$LOCAL_APP_DIR/firefox.desktop"
+    
+    # データベースの更新と、GNOMEのアイコンキャッシュの強制リフレッシュ
+    update-desktop-database "$LOCAL_APP_DIR" >/dev/null 2>&1 || true
+    sudo gtk-update-icon-cache -f -t /usr/share/icons/hicolor >/dev/null 2>&1 || true
+    sudo gtk-update-icon-cache -f -t /usr/share/icons/gnome >/dev/null 2>&1 || true
+fi
+
+# ---------------------------------------------------------
+# 6. Configure Firefox UI (Titlebar & Theme Sync)
+# ---------------------------------------------------------
+echo ">> Configuring Firefox UI to use system titlebar..."
+REAL_USER=${SUDO_USER:-$USER}
+USER_HOME=$(eval echo ~$REAL_USER)
+
+# 既に起動してプロファイルがある場合への適用
+for profile in "$USER_HOME/.mozilla/firefox/"*.default* \
+               "$USER_HOME/snap/firefox/common/.mozilla/firefox/"*.default* \
+               "$USER_HOME/.config/mozilla/firefox/"*.default*; do
+    if [ -d "$profile" ]; then
+        if [ -f "$profile/user.js" ]; then
+            sed -i '/browser.tabs.inTitlebar/d' "$profile/user.js"
+            sed -i '/extensions.activeThemeID/d' "$profile/user.js"
+        fi
+        
+        # タイトルバーを表示し、テーマをシステムデフォルトに追従させる
+        echo 'user_pref("browser.tabs.inTitlebar", 0);' >> "$profile/user.js"
+        echo 'user_pref("extensions.activeThemeID", "default-theme@mozilla.org");' >> "$profile/user.js"
+        
+        chown "$REAL_USER:$REAL_USER" "$profile/user.js" 2>/dev/null || true
+    fi
+done
+
+# まだ一度も起動していない（プロファイル未作成）環境でも確実に効かせるため、
+# システム全体のデフォルト設定ファイル(syspref.js)にも追記しておく
+if [ -d "/etc/firefox" ]; then
+    sudo bash -c 'echo "pref(\"browser.tabs.inTitlebar\", 0);" >> /etc/firefox/syspref.js'
+    sudo bash -c 'echo "pref(\"extensions.activeThemeID\", \"default-theme@mozilla.org\");" >> /etc/firefox/syspref.js'
+fi
+
+# ---------------------------------------------------------
+# 7. Add to the beginning of Dock (Favorites) safely via Python
+# ---------------------------------------------------------
+echo ">> Adding Deb Firefox to dock..."
+FAVORITES=$(gsettings get org.gnome.shell favorite-apps)
+export FAVORITES
+
+NEW_FAVORITES=$(python3 << 'EOF'
+import os, re
+raw = os.environ.get('FAVORITES', '')
+favs = re.findall(r"'([^']+)'", raw)
+# 既存のFirefox関連を一度すべて削除
+excludes = ['firefox.desktop', 'firefox_firefox.desktop']
+favs = [x for x in favs if x not in excludes]
+# 一番左（先頭）に確実に追加
+favs.insert(0, 'firefox.desktop')
+print('[' + ', '.join([f"'{x}'" for x in favs]) + ']')
+EOF
+)
+
+gsettings set org.gnome.shell favorite-apps "$NEW_FAVORITES"
+
+# 8. Check priority (apt-cache policy)
+echo -e "\n>> Verification (apt-cache policy firefox):"
+apt-cache policy firefox
+
+echo ""
+echo -n "Hit Any Key to return to menu: "
+read -r -n 1 -s answer
+echo ""
