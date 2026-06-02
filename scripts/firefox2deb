@@ -10,6 +10,7 @@ if snap list | grep -q firefox; then
   echo ">> Removing snap version of Firefox..."
   echo "   (Note: If this takes too long, abort (Ctrl+C), run 'sudo snap refresh', and try again)"
   sudo snap remove --purge firefox
+  # CD-ROMなどのシステムパッケージ巻き込み削除を防止するため --autoremove を除外
   sudo apt remove -y firefox >/dev/null 2>&1
 else
   echo ">> Snap version of Firefox is not installed."
@@ -45,8 +46,17 @@ mkdir -p "$LOCAL_APP_DIR"
 
 if [ -f /usr/share/applications/firefox.desktop ]; then
     cp /usr/share/applications/firefox.desktop "$LOCAL_APP_DIR/"
-    # アイコン指定を強制書き換え
-    sed -i 's/^Icon=.*/Icon=firefox/' "$LOCAL_APP_DIR/firefox.desktop"
+    
+    # 判明した正しいアイコン名「firefox_mk2」に書き換え
+    sed -i 's/^Icon=.*/Icon=firefox_mk2/' "$LOCAL_APP_DIR/firefox.desktop"
+    
+    # 起動時のWMClassを明記して、Dockが確実にこのショートカットと実行画面を紐付けるようにする
+    if ! grep -q "^StartupWMClass=" "$LOCAL_APP_DIR/firefox.desktop"; then
+        echo "StartupWMClass=Firefox" >> "$LOCAL_APP_DIR/firefox.desktop"
+    fi
+    
+    # GNOME Shellにこのローカルファイルを「安全」と認識させるための実行権限付与
+    chmod +x "$LOCAL_APP_DIR/firefox.desktop"
     
     # データベースの更新と、GNOMEのアイコンキャッシュの強制リフレッシュ
     update-desktop-database "$LOCAL_APP_DIR" >/dev/null 2>&1 || true
